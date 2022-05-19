@@ -12,7 +12,7 @@
         </div>
       <div class="w-56 flex justify-around">
         <button @click="toggleLoginModal">로그인</button>
-        <button class="p-2 border-2 rounded-lg">회원가입</button>
+        <button @click="toggleSignupModal" class="p-2 border-2 rounded-lg">회원가입</button>
       </div>
       
 
@@ -24,12 +24,14 @@
 
 
   <LoginForm/>
+  <SignupForm/>
 
   </div>
 </template>
 
 <script>
 import LoginForm from '@/components/LoginForm.vue'
+import SignupForm from '@/components/SignupForm.vue'
 
 export default {
 name: 'theNavbar',
@@ -40,12 +42,16 @@ data(){
 },
 methods: {
   toggleLoginModal(){
-    this.$store.commit('toggleLoginModal')
-  }
+    this.$store.commit('TOGGLE_LOGIN_MODAL')
+  },
+  toggleSignupModal(){
+    this.$store.commit('TOGGLE_SIGNUP_MODAL')
+  },
 },
 computed: {},
 components: {
   LoginForm,
+  SignupForm,
 },
 }
 </script>

@@ -5,16 +5,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loginModalToggle: false
+    loginModal: false,
+    signupModal: false
   },
   getters: {
   },
   mutations: {
-    toggleLoginModal(state){
+    TOGGLE_LOGIN_MODAL(state){
       
-      state.loginModalToggle = !state.loginModalToggle
-      console.log(state.loginModalToggle)
-    }
+      state.loginModal = !state.loginModal
+    },
+    TOGGLE_SIGNUP_MODAL(state){
+      
+      state.signupModal = !state.signupModal
+    },
   },
   actions: {
   },
