@@ -1,14 +1,23 @@
 <template>
-  <div >
-    Home
-    <h1 class="underline">테일윈드 작동하나요??</h1>
+  <div>
+    
+    <MovieCardList/>
+
   </div>
 </template>
 
 <script>
 import {fetchArticleList} from '@/api/index.js'
+// import MovieCard from '@/components/MovieCard.vue'
+import MovieCardList from '@/components/MovieCardList.vue'
+
+
 export default {
   name: 'HomeView',
+  components: {
+    // MovieCard,
+    MovieCardList,
+  },
   async created(){
     //1.API 서버로 게시글 목록 요청
     const res = await fetchArticleList()

@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <nav>
       
       <div class="flex justify-between items-center my-2">
