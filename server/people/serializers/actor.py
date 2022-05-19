@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Article
+from ..models import Article
 
 class ArticleListSerializer(serializers.ModelSerializer):
     
