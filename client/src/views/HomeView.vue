@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div >
     Home
+    <h1 class="underline">테일윈드 작동하나요??</h1>
   </div>
 </template>
 
