@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="btn-container flex justify-between w-full absolute top-48 z-40">
+    <div class="btn-container flex justify-between w-full absolute top-48 z-30">
 
       <button @click="slidePrev">
         <span class="material-symbols-outlined text-5xl text-slate-300">

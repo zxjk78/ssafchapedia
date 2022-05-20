@@ -1,7 +1,8 @@
 <template>
   <div>
     <nav>
-      
+
+
       <div class="flex justify-between items-center my-2">
         <a href="/">
         <h2 class="ml-8 text-3xl text-yellow-400 font-bold">SSAFY</h2>
@@ -25,18 +26,17 @@
         <button @click="toggleSignupModal" class="p-2 border-2 rounded-lg">회원가입</button>
       </div>
       
-
       </div>
 
     </nav>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
 
 
 
 
   <LoginForm/>
   <SignupForm/>
+
+
 
   </div>
 </template>
@@ -49,6 +49,8 @@ export default {
 name: 'theNavbar',
 data(){ 
   return {
+    showLogin: this.$store.state.loginModal, 
+    showSignup: this.$store.state.loginModal, 
 } 
 },
 methods: {
@@ -65,13 +67,11 @@ methods: {
 
     }, 300),
 
-  // keywordSearch(){
-  //   console.log(this.keyword)
-  //   this.$store.dispatch('keywordSearch', this.keyword)         
-  // }
   logout(){
     this.$store.commit('LOGOUT')
   },
+
+
 
 
 },
