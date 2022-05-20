@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="ml-5">
-
-      <MovieSearchList/>
+      <MovieSearchList
+      :movies="movieSearchResult"
+      />
 
 
       <PeopleSearchList/>
@@ -22,10 +23,19 @@ import MovieSearchList from '@/components/search/MovieSearchList.vue'
 import PeopleSearchList from '@/components/search/PeopleSearchList.vue'
 export default {
 name: 'SearchView',
+data() {
+  return {
+  }
+},
 components: {
   MovieSearchList,
   PeopleSearchList,
 },
+computed: {
+  movieSearchResult(){
+    return this.$store.state.movieSearchList
+  }
+}
 }
 </script>
 

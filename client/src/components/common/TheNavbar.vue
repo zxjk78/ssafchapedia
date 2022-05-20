@@ -8,7 +8,7 @@
         </a>
         <div class="flex items-center relative">
         <svg class="w-5 h-5 absolute left-20 ml-5 text-slate-400 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-        <input type="text" class="text-center w-96 h-10 bg-slate-100 rounded-lg	ml-20	" placeholder="감독명, 작품, 배우를 검색해보세요." @input="keywordSearch" v-model="keyword">
+        <input type="text" class="text-center w-96 h-10 bg-slate-100 rounded-lg	ml-20	" placeholder="감독명, 작품, 배우를 검색해보세요." @input="onSearchDebounce">
 
         </div>
 
@@ -46,7 +46,6 @@ export default {
 name: 'theNavbar',
 data(){ 
   return {
-    keyword: '',
 } 
 },
 methods: {
@@ -56,12 +55,17 @@ methods: {
   toggleSignupModal(){
     this.$store.commit('TOGGLE_SIGNUP_MODAL')
   },
-  keywordSearch(){
-    console.log(this.keyword)
-    this.$store.dispatch('keywordSearch', this.keyword)
-      
-    
-  }
+
+  onSearchDebounce: _.debounce(function(event){      
+      //v-model 한글 연동문제 있어서 event.target.value로 변경
+      this.$store.dispatch('keywordSearch', event.target.value)
+
+    }, 300),
+
+  // keywordSearch(){
+  //   console.log(this.keyword)
+  //   this.$store.dispatch('keywordSearch', this.keyword)         
+  // }
 },
 computed: {
   isLoggedIn(){

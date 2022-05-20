@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from '@/router'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -52,10 +53,19 @@ export default new Vuex.Store({
       const TMDB_API_KEY = 'd5207cc845d8fba31db1ee25f04e5084'  
       
       const api_url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=ko-KR&page=1&include_adult=false&query=${keyword}`
-
       const res = await axios.get(api_url)
       
-      console.log(res.data.results)
+      context.commit('SET_MOVIE_SEARCH_LIST', res.data.results)
+      // store 쪽에서 router를 통해 이동하려면, router 를 import 해야 한다.
+      // NavigationDuplicated Error가 났는데, 같은 페이지로 router.push를 시도할 경우 나는 에러, 같은 path가 아닐 때만 이동하도록
+      if (document.location.pathname != '/search') {
+        router.push({name: 'search'}).catch(err=>{
+          if (err.name === 'NavigationDuplicated'){
+            return
+          }
+        })
+      } 
+
     }
   },
   modules: {
