@@ -2,5 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.article_list),
+    path('', views.movie_list),
+    path('movie/<int:movie_pk>/',views.movie_detail),
+    path('random/',views.movie_random),
 ]

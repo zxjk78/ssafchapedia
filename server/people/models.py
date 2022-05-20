@@ -1,6 +1,6 @@
 from django.db import models
 from numpy import character
-from ..movies.models import Movie
+import movies
 # Create your models here.
 class Director(models.Model):
     name = models.CharField(max_length=40)
@@ -15,6 +15,6 @@ class Actor(models.Model):
 
 
 class Cast(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    actor = models.OneToOneField(Actor, on_delete=models.SET_NULL)
+    movie = models.ForeignKey('movies.Movie', on_delete=models.CASCADE)
+    actor = models.OneToOneField(Actor, on_delete=models.SET_NULL,null=True)
     character = models.CharField(max_length=100)
