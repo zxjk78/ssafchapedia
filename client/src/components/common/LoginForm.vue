@@ -29,9 +29,10 @@
                     </div>
 
                     <hr>
+
                     <div class="flex justify-around social-icons">
                       
-                      <a v-for="image, index in images" :key="index" href=""><img :src="require(`@/assets/login/${image}`)" alt=""></a>
+                      <a v-for="image, index in images" :key="index" href="#"><img :src="require(`@/assets/login/${image}`)" alt=""></a>
 
                     </div>
                 </form>

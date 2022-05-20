@@ -2,6 +2,8 @@
   <div>
     <TheNavbar/>
     
+
+
     <router-view/>
   </div>
 </template>

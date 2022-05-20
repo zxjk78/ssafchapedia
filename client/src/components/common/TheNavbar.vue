@@ -18,6 +18,7 @@
         <span class="material-symbols-outlined text-3xl">
         account_circle
         </span>
+        <button class="border-2 border-yellow-400	" @click="logout">로그아웃</button>
       </div>
       <div v-else class="w-56 flex justify-around">
         <button @click="toggleLoginModal">로그인</button>
@@ -28,6 +29,8 @@
       </div>
 
     </nav>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
 
 
 
@@ -66,6 +69,11 @@ methods: {
   //   console.log(this.keyword)
   //   this.$store.dispatch('keywordSearch', this.keyword)         
   // }
+  logout(){
+    this.$store.commit('LOGOUT')
+  },
+
+
 },
 computed: {
   isLoggedIn(){

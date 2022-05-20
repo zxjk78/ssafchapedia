@@ -41,6 +41,13 @@ export default new Vuex.Store({
     SET_PEOPLE_SEARCH_LIST(state, list){
       state.movieSearchList = list
     },
+    LOGOUT(state){
+      // 1. DB에서 해당 authToken 삭제
+      // 2. localstorage에서 해당 authToken 삭제
+      localStorage.setItem('authToken', '')
+      // 3. vuex state 에서 해당 authToken 삭제
+      state.authToken = ''
+    }
   },
   actions: {
     async keywordSearch(context, keyword){
