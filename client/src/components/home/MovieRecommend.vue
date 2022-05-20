@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import MovieCard from '@/components/common/MovieCard.vue'
+import MovieCard from '@/components/home/MovieCardHome.vue'
 import ScoreChart from '@/components/common/ScoreChart.vue'
 export default {
   name:'MovieRecommend',

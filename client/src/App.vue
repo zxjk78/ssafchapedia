@@ -14,9 +14,7 @@ export default {
     TheNavbar,
   },
   computed:{
-    isLoggedIn(){
-      return this.$store.getters.isLoggedIn
-    },
+    
   },
 }
 </script>

@@ -30,9 +30,9 @@
 
                     <hr>
                     <div class="flex justify-around social-icons">
-                      <a href=""><img src="@/assets/login/google-g-2015-logo-png-transparent.png" alt=""></a>
-                      <a href=""><img src="@/assets/login/btnG_icon_circle.png" alt=""></a>
-                      <a href=""><img src="@/assets/login/ico-kakao.png" alt=""></a>
+                      
+                      <a v-for="image, index in images" :key="index" href=""><img :src="require(`@/assets/login/${image}`)" alt=""></a>
+
                     </div>
                 </form>
             </div>
@@ -48,7 +48,14 @@
 export default {
 name: 'LoginForm',
 data(){ 
+  // 수정 필요한 부분, 나중에 링크 달아줘야 한다.
   return {
+    images: [
+      'google-g-2015-logo-png-transparent.png',
+      'btnG_icon_circle.png',
+      'ico-kakao.png',    
+    ],
+
   } 
 },
 props: {
