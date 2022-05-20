@@ -2,6 +2,7 @@
   <div>
     
     <MovieCardList/>
+    <MovieRecommend/>
 
   </div>
 </template>
@@ -9,7 +10,8 @@
 <script>
 import {fetchArticleList} from '@/api/index.js'
 // import MovieCard from '@/components/MovieCard.vue'
-import MovieCardList from '@/components/MovieCardList.vue'
+import MovieCardList from '@/components/home/MovieCardList.vue'
+import MovieRecommend from '@/components/home/MovieRecommend.vue'
 
 
 export default {
@@ -17,6 +19,7 @@ export default {
   components: {
     // MovieCard,
     MovieCardList,
+    MovieRecommend,
   },
   async created(){
     //1.API 서버로 게시글 목록 요청
