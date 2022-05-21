@@ -1,7 +1,7 @@
 from xml.parsers.expat import model
 from django.db import models
 from django.conf import settings
-from ..movies.models import Movie
+from movies.models import Movie
 # Create your models here.
 user = settings.AUTH_USER_MODEL
 
