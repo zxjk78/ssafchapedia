@@ -33,9 +33,9 @@
 
                     <div class="flex justify-around social-icons">
                       
-                      <a href="#"><img src="@/assets/login/btnG_icon_circle.png" alt=""></a>
+                      <div id="naver_id_login"></div>
 
-                      <div id="my-signin2"></div>
+                      <div id="my-signin2-google"></div>
                       <a href="#"><img src="@/assets/login/ico-kakao.png" alt=""></a>
                       
 
@@ -83,6 +83,15 @@ methods: {
       console.log(error);
     },
 
+  createNaverLogin(){
+    const NAVER_LOGIN_CLIENT_ID = 'QzQ846KTZpYwA62JSExY'
+    const NAVER_LOGIN_CALLBACK_URL = 'http://localhost:8000/accounts/naver/login/callback/'
+
+    var naver_id_login = new naver_id_login(NAVER_LOGIN_CLIENT_ID, NAVER_LOGIN_CALLBACK_URL);
+    naver_id_login.setButton("white", 3,40); //네이버 로그인 버튼 설정
+    naver_id_login.setPopup(); //Popup형태의 인증 진행
+    naver_id_login.init_naver_id_login();
+  }
 
 },
 computed: {
@@ -91,8 +100,8 @@ computed: {
   }
 },
 updated() { // 값이 바뀔 때: 즉 state의 값이 바뀔 때를 hookup하기 때문에 created, mounted 가 아닌  update를 사용
-// 공식 문서에 따르면 스타일링에서 바꿀 수 있는 값이 매우 한정되어 있음,
-    window.gapi.signin2.render('my-signin2', {
+// 공식 문서에 따르면 스타일링에서 바꿀 수 있는 값은 한정되어 있음,
+    window.gapi.signin2.render('my-signin2-google', {
       scope: 'profile email',
       width:  50,
       height: 50,
@@ -101,7 +110,29 @@ updated() { // 값이 바뀔 때: 즉 state의 값이 바뀔 때를 hookup하기
       onsuccess: this.onSuccess,
       onfailure: this.onFailure,
     });
+
+
+
+    const NAVER_LOGIN_CLIENT_ID = 'QzQ846KTZpYwA62JSExY'
+    const NAVER_LOGIN_CALLBACK_URL = 'http://localhost:8000/accounts/naver/login/callback/'
+    const naver_id_login = new window.naver_id_login(NAVER_LOGIN_CLIENT_ID, NAVER_LOGIN_CALLBACK_URL);
+    const state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 1,40); // 버튼 설정
+    naver_id_login.setState(state);
+    // naver_id_login.setPopup(); // popup 설정을 위한 코드
+    naver_id_login.init_naver_id_login();
+
+
+
+
+
   },
+  head: {
+    script: [
+    { src: 'https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js' },
+    { src: 'http://code.jquery.com/jquery-1.11.3.min.js' },
+  ]
+},
 
 
 }
@@ -116,7 +147,7 @@ updated() { // 값이 바뀔 때: 즉 state의 값이 바뀔 때를 hookup하기
   height: 50px;
 }
 
-#my-signin2 > div{
+#my-signin2-google > div{
   border-radius: 50%;
 }
 </style>

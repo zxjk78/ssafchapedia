@@ -1,5 +1,7 @@
 <template>
   <div>
+      <!-- <div id="naver_id_login"></div> -->
+
     <nav>
 
 
@@ -85,6 +87,8 @@ components: {
   LoginForm,
   SignupForm,
 },
+
+
 }
 </script>
 
