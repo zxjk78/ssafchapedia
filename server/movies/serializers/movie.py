@@ -29,12 +29,16 @@ class MovieListSerializer(serializers.ModelSerializer):
         fields = (
             'title', 
             'overview', 
-            'runtime', 
+            'genre',
+            'adult',
             'vote_arerage',
             'vote_count',
             'release_date',
             'poster_path',
             'vote_arerage',
+            'original_title',
+            'original_language',
+            'popularity',
             'director',
             'cast_set',
         )
