@@ -1,27 +1,22 @@
 <template>
   <div>
-    <nav>
-      <template v-if="isLoggedIn">
+    <TheNavbar/>
+    
 
-      <router-link to="/">Home</router-link> |
-      </template>
-      <template v-else>
 
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Signup</router-link> |
-      </template>
-    </nav>
     <router-view/>
   </div>
 </template>
 
 <script>
+import TheNavbar from '@/components/common/TheNavbar.vue'
 export default {
   name: 'App',
+  components: {
+    TheNavbar,
+  },
   computed:{
-    isLoggedIn(){
-      return this.$store.getters.isLoggedIn
-    },
+    
   },
 }
 </script>
