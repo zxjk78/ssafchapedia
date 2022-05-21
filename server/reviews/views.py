@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from .serializers.review import ReviewListSerializer
 from .models import Review
+from movies.models import Movie
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -15,9 +16,13 @@ def review_list(request):
 
 @api_view(['POST'])
 def review_create(request, movie_pk):
+
     user = request.user
-    serializer =  ReviewListSerializer(request.POST)
+
+    movie = Movie.objects.get(pk=movie_pk)
+    serializer =  ReviewListSerializer(data=request.data)
+    # 저장 단계 전에 외래키 필드값의 부재에 오류 안나게 하려면 serializer에서 read_only 옵션이나 read_only_fields 작성
     if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie_pk, user=user.pk)
+        serializer.save(movie=movie, user=user)
     
     return Response(serializer.data, status=status.HTTP_201_CREATED)

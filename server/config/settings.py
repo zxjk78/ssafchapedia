@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'movies',
     'people',
 
+
     # Third-party packages
     'django_seed',
     'corsheaders',
+    # swagger
+    'drf_yasg',
 
     'rest_framework',
     'rest_framework.authtoken',

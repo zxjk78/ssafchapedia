@@ -8,6 +8,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
         fields = (
             'user', 
             'movie', 
+            'title', 
             'content', 
             'directing',
             'music',
@@ -16,4 +17,4 @@ class ReviewListSerializer(serializers.ModelSerializer):
             'art',
         )
 
-
+        read_only_fields = ['user', 'movie', ]
