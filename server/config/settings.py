@@ -50,14 +50,14 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
 
-    # # socialLogin 관련 모듈 allauth
+    # allauth
     'allauth', 
     'allauth.account',
     'allauth.socialaccount',
     # allauth Oauth2.0 service providers
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.naver',
-    # 'allauth.socialaccount.providers.kakao',
+    'allauth.socialaccount.providers.kakao',
     
     # Django cores
     'django.contrib.sites',
@@ -102,13 +102,13 @@ TEMPLATES = [
     },
 ]
 
-# AUTHENTICATION_BACKENDS = [
-#     # Needed to login by username in Django admin, regardless of `allauth`
-#     'django.contrib.auth.backends.ModelBackend',
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
 
-#     # `allauth` specific authentication methods, such as login by e-mail
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# ]
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -182,6 +182,7 @@ CORS_ALLOWED_ORIGINS = [
 # Allauth 설정 (registration)
 ACCOUNT_EMAIL_VERIFICATION = None
 
+SITE_ID = 1
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -191,7 +192,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-SITE_ID = 1
 SOCIALACCOUNT_LOGIN_ON_GET = True
 # ACCOUNT_LOGOUT_ON_GET = True
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
