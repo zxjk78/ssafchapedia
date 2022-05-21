@@ -20,8 +20,9 @@
 
     <VueSlickCarousel v-bind="settings" class="mx-6">
       <MovieCard
-      v-for="movie in 15"
+      v-for="movie in movies"
       :key="movie.id"
+      :movies_list="movies_list"
       />
 
 
@@ -38,6 +39,7 @@
 
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
+  import {mapGetters} from 'vuex'
   export default {
     name: 'MyComponent',
     data(){
@@ -59,15 +61,31 @@
       MovieCard,
       },
     methods:{
-      slideNext(){
-        const nextBtn = document.querySelector('.slick-next')
-        nextBtn.click()
-      },
-      slidePrev(){
-        const prevBtn = document.querySelector('.slick-prev')
-        prevBtn.click()
-      }
-    }  
+        slideNext(){
+          const nextBtn = document.querySelector('.slick-next')
+          nextBtn.click()
+        },
+        slidePrev(){
+          const prevBtn = document.querySelector('.slick-prev')
+          prevBtn.click()
+        },
+        //영화
+        setToken(){
+          const token = localStorage.getItem('jwt')
+          const config = {
+          Authorization: `JWT ${token}`
+        }
+      return config
+    },
+    },  
+    computed:{
+      ...mapGetters([
+        'movies'
+      ])
+    },
+    created(){
+      this.$store.dispatch('getMovies',this.setToken())
+    },
   }
 </script>
 

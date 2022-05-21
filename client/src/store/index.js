@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '@/router'
+
+const SERVER = 'http://127.0.0.1:8000/'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,6 +14,8 @@ export default new Vuex.Store({
     movieSearchList: [],
     peopleSearchList: [],
 
+    //영화 리스트 받아오기
+    movies_list:[],
     // 로그인, 회원가입폼 modal에 사용되는 변수
     loginModal: false,
     signupModal: false,
@@ -22,6 +26,11 @@ export default new Vuex.Store({
     isLoggedIn(state){
       return state.authToken ? true : false
     },
+
+    //영화 리스트
+    movies_list(state){
+      return state.movies_list
+    }
   },
   mutations: {
     TOGGLE_LOGIN_MODAL(state){      
@@ -47,9 +56,27 @@ export default new Vuex.Store({
       localStorage.setItem('authToken', '')
       // 3. vuex state 에서 해당 authToken 삭제
       state.authToken = ''
-    }
+    },
+    
+    //영화리스트
+    GET_MOVIES(state, res) {
+      state.movies_list = res
+    },
   },
   actions: {
+
+    getMovies({commit}, token) {
+      axios({
+        method: 'GET',
+        url: `${SERVER}api/v1/movies/`,
+        headers: token,
+      })
+      .then(res => {
+        commit('GET_MOVIES', res.data)
+      })
+      .catch(err => console.log(err))
+    },
+
     async keywordSearch(context, keyword){
       if (!keyword){
         context.commit('SET_MOVIE_SEARCH_LIST', [])
@@ -71,8 +98,7 @@ export default new Vuex.Store({
             return
           }
         })
-      } 
-
+      }
     }
   },
   modules: {
