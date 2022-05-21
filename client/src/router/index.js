@@ -14,6 +14,7 @@ const routes = [
     path: '', //=> http://localhost:8080
     name: 'home',
     component: HomeView,
+
   },
   {
     path: '/signup', //=> http://localhost:8080/signup
