@@ -6,6 +6,9 @@ from movies.models import Movie
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+# swagger
+from drf_yasg.utils import swagger_auto_schema
+
 # Create your views here.
 
 @api_view(['GET'])
@@ -14,6 +17,7 @@ def review_list(request):
     serializer = ReviewListSerializer(reviews, many=True)
     return Response(serializer.data)
 
+@swagger_auto_schema(methods=['POST'], request_body=ReviewListSerializer)
 @api_view(['POST'])
 def review_create(request, movie_pk):
 
