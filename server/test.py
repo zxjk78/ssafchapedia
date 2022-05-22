@@ -2,11 +2,11 @@
 주석처리한 것이
 django project, app 외부에서 파일을 사용하기 위한 코드
 '''
-import os
-from config.settings import LANGUAGE_CODE
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
-import django
-django.setup()
+# import os
+# from config.settings import LANGUAGE_CODE
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+# import django
+# django.setup()
 from movies.models import Movie
 from people.models import Actor, Tmp, Cast
 import requests
