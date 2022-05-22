@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Movie,Genre
-from .serializers.movie import MovieListSerializer
+from .models import Movie, Genre
+from .serializers.movie import MovieListSerializer, MovieSearchSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -26,4 +26,13 @@ def movie_detail(request,movie_pk):
 def movie_random(request):
     movies = Movie.objects.order_by('?')[:50]
     serializer = MovieListSerializer(movies,many=True)
+    return Response(serializer.data,status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def movie_search(request):
+    keyword = request.GET.get('keyword')
+    
+    movies = Movie.objects.filter(title__contains=keyword)
+
+    serializer = MovieSearchSerializer(movies, many=True)
     return Response(serializer.data,status=status.HTTP_200_OK)
