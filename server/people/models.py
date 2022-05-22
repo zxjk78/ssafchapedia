@@ -1,6 +1,6 @@
 from django.db import models
 from numpy import character
-import movies
+
 # Create your models here.
 class Director(models.Model):
     name = models.CharField(max_length=40)

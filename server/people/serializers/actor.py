@@ -1,13 +1,12 @@
 from rest_framework import serializers
-from ..models import Article
+from ..models import *
 
-class ArticleListSerializer(serializers.ModelSerializer):
+class PeopleListSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Article
+        model = Director
         fields = (
-            'title', 
-            'content', 
-            'created_at', 
-            'updated_at'
+            'movie', 
+            'actor', 
+            'character',
         )

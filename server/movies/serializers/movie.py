@@ -17,9 +17,10 @@ class MovieListSerializer(serializers.ModelSerializer):
                 fields = ('name', 'popularity', 'profile_path')
         
         actor = ActorSerializer(read_only=True)
+        
         class Meta:
             model = Cast
-            fields = ('actor', 'profile_path')
+            fields = ('actor', 'movie','character')
 
     director = DirectorSerializer(read_only=True)
     cast_set = CastSerializer(read_only = True)
@@ -29,13 +30,12 @@ class MovieListSerializer(serializers.ModelSerializer):
         fields = (
             'title', 
             'overview', 
-            'genre',
+            'genre_ids',
             'adult',
-            'vote_arerage',
+            'vote_average',
             'vote_count',
             'release_date',
             'poster_path',
-            'vote_arerage',
             'original_title',
             'original_language',
             'popularity',
