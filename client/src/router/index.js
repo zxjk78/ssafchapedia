@@ -6,6 +6,8 @@ import SignupView from '@/views/SignupView'
 import LoginView from '@/views/LoginView'
 import ProfileView from '@/views/ProfileView'
 import SearchView from '@/views/SearchView'
+// import NaverLoginAccessView from '@/views/NaverLoginAccessView'
+// import GoogleLoginAccessView from '@/views/GoogleLoginAccessView'
 
 Vue.use(VueRouter)
 
@@ -37,6 +39,16 @@ const routes = [
     name: 'search',
     component: SearchView,
   },
+  // {
+  //   path: '/accounts/naver/login/callback/',  //=> http://localhost:8080/accounts/naver/login/callback/
+  //   name: 'login-naver',
+  //   component: NaverLoginAccessView,
+  // },
+  // {
+  //   path: '/accounts/google/login/callback/',  //=> http://localhost:8080/accounts/google/login/callback/
+  //   name: 'login-google',
+  //   component: GoogleLoginAccessView,
+  // },
 ]
 
 const router = new VueRouter({

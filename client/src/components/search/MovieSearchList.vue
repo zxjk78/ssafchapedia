@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="my-5 text-3xl font-bold">영화 <span>영화 개수</span></h1>
+    <h1 class="my-5 text-3xl font-bold">영화 <span>{{movieList.length}}</span></h1>
 
     <MovieSearch
-    v-for="movie in movies"
+    v-for="movie in movieList"
     :key="movie.id"
     :movie="movie"
     />
@@ -13,17 +13,35 @@
 
 <script>
 import MovieSearch from '@/components/search/MovieSearch.vue'
+import {fetchMovieSearchList} from '@/api/index.js'
+
 export default {
   name: 'MovieSearchList',
+  data(){
+    return {
+      movieList: ''
+    }
+  },
   components: {
     MovieSearch,
   },
-  props: {
-    movies: {
-      type: Array,
-      required: true,
-    }
+props:{
+  keyword:{
+    type:String,
+    required: true,
   }
+},
+  async created() {
+    try {
+    const keyword = this.keyword
+    const movieSearchList = await fetchMovieSearchList(keyword)
+    
+    this.movieList = movieSearchList.data
+
+  } catch (error) {
+    console.error(error)
+  }
+  },
 }
 </script>
 

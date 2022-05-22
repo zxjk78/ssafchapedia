@@ -13,7 +13,7 @@ export default new Vuex.Store({
     // 키워드 검색에 사용되는 변수
     movieSearchList: [],
     peopleSearchList: [],
-
+    searchKeyword : '',
     //영화 리스트 받아오기
     movies_list:[],
     // 로그인, 회원가입폼 modal에 사용되는 변수
@@ -30,6 +30,10 @@ export default new Vuex.Store({
     //영화 리스트
     movies_list(state){
       return state.movies_list
+    },
+    //영화, 배우 검색 키워드
+    search_keyword(state){
+      return state.searchKeyword
     }
   },
   mutations: {
@@ -43,6 +47,9 @@ export default new Vuex.Store({
       state.authToken = token
       //localStorage는 String밖에 저장하지 못하므로, 만약 객체 등을 저장하려면 JSON으로 문자열로 변환해서 저장 필요
       localStorage.setItem('authToken', token)
+    },
+    SET_SEARCH_KEYWORD(state, keyword){
+      state.searchKeyword = keyword
     },
     SET_MOVIE_SEARCH_LIST(state, list){
       state.movieSearchList = list

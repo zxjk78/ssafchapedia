@@ -47,6 +47,7 @@
 import LoginForm from '@/components/common/LoginForm.vue'
 import SignupForm from '@/components/common/SignupForm.vue'
 import _ from 'lodash'
+
 export default {
 name: 'theNavbar',
 data(){ 
@@ -63,11 +64,23 @@ methods: {
     this.$store.commit('TOGGLE_SIGNUP_MODAL')
   },
 
+  // onSearchDebounce: _.debounce(function(event){      
   onSearchDebounce: _.debounce(function(event){      
       //v-model 한글 연동문제 있어서 event.target.value로 변경
-      this.$store.dispatch('keywordSearch', event.target.value)
+      // this.$store.dispatch('keywordSearch', event.target.value)
 
-    }, 300),
+      const keyword = event.target.value
+      if (!keyword) return
+      this.$store.commit('SET_SEARCH_KEYWORD', keyword)
+
+      if (document.location.pathname != '/search') {
+        this.$router.push({name: 'search'}).catch(err=>{
+          if (err.name === 'NavigationDuplicated'){
+            return
+          }
+        })
+      }
+      }, 300),
 
   logout(){
     this.$store.commit('LOGOUT')

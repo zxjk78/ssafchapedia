@@ -1,16 +1,24 @@
 import axios from 'axios'
 
-const LOGIN_URL = '/dj-rest-auth/login/'
-const SIGNUP_URL = '/dj-rest-auth/registration/'
-const ARITICLE_LIST_URL = '/articles/'
+const LOGIN_URL = '/accounts/login/'
+const SIGNUP_URL = '/accounts/signup/'
+const ARTICLE_LIST_URL = '/articles/'
 
+// movie
+const MOVIE_SEARCH_LIST_URL = '/movies/search'
+// actor
+const ACTOR_SEARCH_LIST_URL = '/people/search'
+
+// review
+const REVIEW_LIST_URL = '/reviews/'
+const REVIEW_CREATE_URL = '/reviews/new/'
 const axiosInstance = axios.create({
   baseURL:'http://localhost:8000/api/v1',
 })
 
 axiosInstance.interceptors.request.use(
   (config)=>{
-    const token = JSON.parse(localStorage.getItem('authToken'))
+    const token = localStorage.getItem('authToken')
     if (token){
       config.headers.Authorization = `Token ${token}`
     }
@@ -20,6 +28,9 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error)
   },
 )
+
+
+//account
 
 const login = async (body) => {
   const res = await axiosInstance.post(LOGIN_URL, body)
@@ -31,13 +42,51 @@ const signup = async (body) => {
   return res 
 }
 
+//movie
+
 const fetchArticleList = async () => {
-  const res = await axiosInstance.get(ARITICLE_LIST_URL)
+  const res = await axiosInstance.get(ARTICLE_LIST_URL)
+  return res
+}
+const fetchMovieSearchList = async (keyword) => {
+  const res = await axiosInstance.get(MOVIE_SEARCH_LIST_URL, {params:{keyword: keyword}})
   return res
 }
 
+//people
+
+const fetchActorSearchList = async (keyword) => {
+  const res = await axiosInstance.get(ACTOR_SEARCH_LIST_URL, {params:{keyword: keyword}})
+  return res
+}
+
+
+//review
+
+const fetchReviewList = async () => {
+  const res = await axiosInstance.get(REVIEW_LIST_URL)
+  return res
+}
+
+const createReview = async (body) => {
+  const res = await axiosInstance.post(REVIEW_CREATE_URL, body)
+  return res
+}
+
+
+
+
+
 export {
+  //account
   login,
   signup,
+  //movie
+  fetchMovieSearchList,
   fetchArticleList,
+  //people
+  fetchActorSearchList,
+  //review
+  fetchReviewList,
+  createReview,
 }
