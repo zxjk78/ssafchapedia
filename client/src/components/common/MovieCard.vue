@@ -9,6 +9,7 @@
         <a href="https://www.naver.com">
             <h5 class="text-lg font-bold tracking-tight text-gray-900 dark:text-white">
               <!-- 범죄도시2 -->
+              {{ movie }}
               {{ movie.title }}
             </h5>
         </a>
@@ -24,8 +25,12 @@
 // import tmdb from '@/@/fixtures/tmdb.json'
 export default {
 name: 'MovieCard',
-data(){ return {
-
+data(){ 
+  return {
+      dialog: false,
+      notifications: false,
+      sound: true,
+      widgets: false,
 } 
 },
 methods: {
