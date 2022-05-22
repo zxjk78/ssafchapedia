@@ -13,7 +13,7 @@ class Actor(models.Model):
     korean_name = models.CharField(max_length=40, null=True)
     popularity = models.FloatField(null=True)
     profile_path = models.CharField(max_length=200, null=True)
-
+    movies = models.ManyToManyField('movies.Movie', through='Cast', related_name='actors')
 
 class Cast(models.Model):
     movie = models.ForeignKey('movies.Movie', on_delete=models.CASCADE)

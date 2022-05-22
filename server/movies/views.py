@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import Movie, Genre
+from people.models import Actor, Tmp
 from .serializers.movie import MovieListSerializer, MovieSearchSerializer
 
 # Create your views here.

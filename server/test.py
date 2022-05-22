@@ -2,11 +2,11 @@
 주석처리한 것이
 django project, app 외부에서 파일을 사용하기 위한 코드
 '''
-# import os
-# from config.settings import LANGUAGE_CODE
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
-# import django
-# django.setup()
+import os
+from config.settings import LANGUAGE_CODE
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+import django
+django.setup()
 from movies.models import Movie
 from people.models import Actor, Tmp, Cast
 import requests
@@ -22,7 +22,7 @@ LANGUAGE_CODE = 'ko-KR'
 
 '''
 1. 내 DB의 영화에서 id로만 요청을 보내서 cast 정보를 json으로 얻어온 후
-맨 앞 6명의 id만을 저장
+맨 앞 6명의 id만을 일단 tmp에 저장
 '''
 
 # for i in range(0, 99):
@@ -59,13 +59,17 @@ LANGUAGE_CODE = 'ko-KR'
 
 '''
 배우 id로 다시 TMDB 로 요청을 보내서, 한글 이름이 존재하는 배우면 배우 테이블에 추가
+Actor.objects.all().delete()
+
+tmp id 818에서 배우62064 집어넣는중
 '''
 
 
-# actor_ids = Tmp.objects.all()
+# actor_ids = Tmp.objects.all()[1759:]
 
 
 # for person in actor_ids:
+    
 #     person_id = person.actor_id
 #     get_people_url = TMDB_BASE_URL + f'/person/{person_id}?api_key={TMDB_API_KEY}&language={LANGUAGE_CODE}'
 
@@ -74,7 +78,7 @@ LANGUAGE_CODE = 'ko-KR'
 #     known_as = raw_data.get('also_known_as')
 #     # 한글 이름이 있는 배우면 본명, 한글명, profile_path, 인기도를 저장한다.
 #     for other_name in known_as:
-#         if re.match(r'[가-힣]', other_name[0]):
+#         if re.match(r'[가-힣]+', other_name[0]):
             
 #             actor_id = raw_data.get('id')
 #             name = raw_data.get('name')
@@ -83,7 +87,7 @@ LANGUAGE_CODE = 'ko-KR'
 #             korean_name = other_name
 #             Actor.objects.create(actor_id=actor_id, name=name, popularity=popularity, profile_path = profile_path, korean_name = other_name)
 
-#             print(f'배우{actor_id} 집어넣는중')
+#             print(f'tmp id {person.id}에서 배우{actor_id} 집어넣는중')
 #             break
 
 
