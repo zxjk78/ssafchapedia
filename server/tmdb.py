@@ -68,7 +68,7 @@ def create_movie_data():
             movie.pop('video')
             tmp = {
                 'model': 'movies.movie',
-                'pk': movie.pop('id'),
+                'pk': movie['id'],
                 'fields': movie,
             }
             movie_data.append(tmp)
