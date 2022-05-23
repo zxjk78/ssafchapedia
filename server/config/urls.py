@@ -40,12 +40,12 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')), 
     # 소셜로그인 기능인데 이렇게 하게 되면 api 만으로서 작동하지 않아서 시간 나면 개선 필요
 
-    
-    path('api/v1/accounts/', include('accounts.urls')),
+    path('api/v1/member/', include('accounts.urls')),
     path('api/v1/articles/', include('articles.urls')),
     path('api/v1/reviews/',include('reviews.urls')),
     path('api/v1/movies/',include('movies.urls')),
     path('api/v1/people/',include('people.urls')),
+    
     
 
     path('api/v1/accounts/', include('dj_rest_auth.urls')), 
