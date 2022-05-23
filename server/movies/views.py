@@ -5,9 +5,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import Movie, Genre
-from people.models import Actor, Tmp
-from .serializers.movie import MovieListSerializer, MovieSearchSerializer
-
+from people.models import Actor, Cast
+from .serializers.movie import MovieListSerializer, MovieSearchSerializer 
 # Create your views here.
 @api_view(['GET'])
 def movie_list(request):
@@ -23,6 +22,14 @@ def movie_detail(request,movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieListSerializer(movie)
     return Response(serializer.data)
+
+#영화 출연 배우 목록 조회
+@api_view(['GET'])
+def movie_cast(request,movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk) #ex)11번 json-> tmdb영화아이디->cast 영화아이디에 맞는 배우->actor 배우탐색
+    serializer = MovieListSerializer.CastSerializer(movie)
+    print(serializer)
+    return Response(serializer.data,status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def movie_random(request):
