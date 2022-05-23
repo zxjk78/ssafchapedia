@@ -9,12 +9,12 @@ from movies.serializers.movie import MovieListSerializer
 from .serializers.actor import ActorSearchSerializer
 
 # Create your views here.
-@api_view(['GET'])
-def people(request):
-    if request.method=='GET':
-        movies = Cast.objects.order_by('-popularity')[:50]
-        serializer = MovieListSerializer.CastSerializer(movies,many=True)
-        return Response(serializer.data,status=status.HTTP_200_OK)
+# @api_view(['GET'])
+# def people(request):
+#     if request.method=='GET':
+#         movies = Cast.objects.order_by('-popularity')[:50]
+#         serializer = MovieListSerializer.CastSerializer(movies,many=True)
+#         return Response(serializer.data,status=status.HTTP_200_OK)
 
 # @api_view(['GET'])
 # def movie_detail(request,movie_pk):

@@ -15,13 +15,14 @@ class MovieListSerializer(serializers.ModelSerializer):
             class Meta:
                 model = Actor
                 fields = ('name', 'popularity', 'profile_path')
-        
+                
         actor = ActorSerializer(read_only=True)
         
         class Meta:
             model = Cast
-            fields = ('actor', 'movie','character')
+            # fields = ('actor', 'movie','character')
 
+            fields = ('actor',)
     director = DirectorSerializer(read_only=True)
     cast_set = CastSerializer(read_only = True)
 
