@@ -6,6 +6,7 @@ const ARTICLE_LIST_URL = '/articles/'
 
 // movie
 const MOVIE_SEARCH_LIST_URL = '/movies/search'
+const MOVIE_URL = '/movies/movie'
 // actor
 const ACTOR_SEARCH_LIST_URL = '/people/search'
 
@@ -52,6 +53,12 @@ const fetchMovieSearchList = async (keyword) => {
   const res = await axiosInstance.get(MOVIE_SEARCH_LIST_URL, {params:{keyword: keyword}})
   return res
 }
+const fetchMovie = async (movieId) => {
+  const movieURL = MOVIE_URL + `/${movieId}/`
+  const res = await axiosInstance.get(movieURL)
+  return res
+}
+
 
 //people
 
@@ -82,6 +89,7 @@ export {
   login,
   signup,
   //movie
+  fetchMovie,
   fetchMovieSearchList,
   fetchArticleList,
   //people

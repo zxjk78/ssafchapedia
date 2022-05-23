@@ -70,7 +70,7 @@ methods: {
       // this.$store.dispatch('keywordSearch', event.target.value)
 
       const keyword = event.target.value
-      if (!keyword) return
+      if (!keyword) return // 비었을 때는 작동 X
       this.$store.commit('SET_SEARCH_KEYWORD', keyword)
 
       if (document.location.pathname != '/search') {
