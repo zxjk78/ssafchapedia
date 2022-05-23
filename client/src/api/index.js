@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const LOGIN_URL = '/accounts/login/'
-const SIGNUP_URL = '/accounts/signup/'
+const LOGIN_URL = '/auth/login/'
+const SIGNUP_URL = '/auth/signup/'
 const ARTICLE_LIST_URL = '/articles/'
 
 // movie
