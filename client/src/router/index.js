@@ -8,6 +8,7 @@ import ProfileView from '@/views/ProfileView'
 import SearchView from '@/views/SearchView'
 import ReviewScoreView from '@/views/ReviewScoreView'
 import ReviewDetailView from '@/views/ReviewDetailView'
+import ActorDetailView from '@/views/ActorDetailView'
 // import NaverLoginAccessView from '@/views/NaverLoginAccessView'
 // import GoogleLoginAccessView from '@/views/GoogleLoginAccessView'
 
@@ -41,6 +42,8 @@ const routes = [
     name: 'search',
     component: SearchView,
   },
+  
+  //review
   {
     path: '/:movieId/review/new', //=> http://localhost:8080/:movieId/review/new
     name: 'review_new',
@@ -51,6 +54,14 @@ const routes = [
     path: '/:movieId/review/new/detail', //=> http://localhost:8080/:movieId/review/new
     name: 'review_new_detail',
     component: ReviewDetailView,
+
+  },
+
+  //actor
+  {
+    path: '/actor/:actorId/detail', //=> http://localhost:8080/actor/:actorId/detail
+    name: 'actor_detail',
+    component: ActorDetailView,
 
   },
 

@@ -2,7 +2,7 @@
   <div>
     <div class="max-w-sm bg-white w-52 rounded-lg dark:bg-gray-800 dark:border-gray-700">
     <a href="https://www.naver.com">
-        <img class="rounded-t-lg" :src="'https://image.tmdb.org/t/p/w300/'+ movieInfo.poster_path" alt="" />
+        <img class="rounded-t-lg" :src="'https://image.tmdb.org/t/p/w300/'+ movieInfo.poster_path" alt="영화포스터" />
         <!-- <img :src="imgSrc" alt="포스터 없음"> -->
     </a>
     <div class="mt-1">
