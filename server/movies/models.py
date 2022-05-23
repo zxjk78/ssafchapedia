@@ -8,6 +8,8 @@ class Genre(models.Model):
     genre = models.CharField(max_length=20)
 
 class Movie(models.Model):
+    pk = models.IntegerField()
+
     genre_ids = models.ManyToManyField(Genre)
     poster_path = models.CharField(max_length=200, blank=True, null=True)
     adult = models.BooleanField()

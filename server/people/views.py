@@ -20,9 +20,7 @@ from .serializers.actor import ActorSearchSerializer
 # def movie_detail(request,movie_pk):
 #     movie = get_object_or_404(Movie, pk=movie_pk)
 #     serializer = MovieListSerializer(movie)
-<<<<<<< HEAD
-#     return Response(serializer.data)
-=======
+
 #     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -33,4 +31,4 @@ def actor_search(request):
 
     serializer = ActorSearchSerializer(actors, many=True)
     return Response(serializer.data,status=status.HTTP_200_OK)
->>>>>>> feat/review-front
+
