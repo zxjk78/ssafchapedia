@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Director,Actor,Cast
+from .models import Actor,Cast
 from movies.serializers.movie import MovieListSerializer
 from .serializers.actor import ActorSearchSerializer, ActorDetailSerializer
 # swagger
