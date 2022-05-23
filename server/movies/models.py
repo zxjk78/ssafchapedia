@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings 
-from people.models import Director
 
 # Create your models here.
 
@@ -19,4 +18,3 @@ class Movie(models.Model):
     popularity = models.FloatField(null=True, blank=True)
     vote_count = models.IntegerField(null=True, blank=True)
     vote_average = models.FloatField(null=True, blank=True)
-    
