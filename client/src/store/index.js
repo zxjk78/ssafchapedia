@@ -14,6 +14,8 @@ export default new Vuex.Store({
     searchKeyword : '',
     //영화 리스트 받아오기
     movies:[],
+    movieTitles:[],
+    reviews:[],
     // 로그인, 회원가입폼 modal에 사용되는 변수
     loginModal: false,
     signupModal: false,
@@ -30,6 +32,13 @@ export default new Vuex.Store({
     movies(state){
       return state.movies},
 
+    movieTitles(state){
+      return state.movieTitles
+    },
+
+    reviews(state){
+      return state.reviews
+    },
     //영화, 배우 검색 키워드
     search_keyword(state){
       return state.searchKeyword
@@ -62,6 +71,21 @@ export default new Vuex.Store({
     GET_MOVIES(state, res) {
       state.movies = res
     },
+    GET_MOVIE_TITLES(state, res) {
+      const tmp = []
+      for (var value of res){
+        const tmp1 = {
+          name:value.title,
+          value:value.title
+        }
+        tmp.push(tmp1)
+      }
+
+      state.movieTitles = tmp
+    },
+    GET_REVIEWS(state,res){
+      state.reviews = res
+    }
   },
   actions: {
 
@@ -76,6 +100,17 @@ export default new Vuex.Store({
       })
       .catch(err => console.log(err))
     },
+    getReviews({commit},token){
+      axios({
+        method: 'GET',
+        url: `${SERVER}api/v1/reviews/`,
+        headers: token,
+      })
+      .then(res => {
+        commit('GET_REVIEWS', res.data)
+      })
+      .catch(err => console.log(err))
+    }
   },
   modules: {
   }
