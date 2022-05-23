@@ -1,14 +1,17 @@
 <template>
   <div>
     <div class="ml-5">
+      <!-- 강제로 re렌더링을 통해 create를 해서 계속 axios를 보내도록 하는 방법 : key를 활용한다. -->
       <MovieSearchList
-      :movies="movieSearchResult"
-      />
+      :keyword="searchKeyword"
+      :key="searchKeyword"/>
 
 
-      <PeopleSearchList/>
+      <PeopleSearchList
+      :keyword="searchKeyword"
+      :key="searchKeyword+1"/>
 
-      <h1>감독 <span>감독 명수</span></h1>
+
 
 
     </div>
@@ -21,6 +24,8 @@
 <script>
 import MovieSearchList from '@/components/search/MovieSearchList.vue'
 import PeopleSearchList from '@/components/search/PeopleSearchList.vue'
+
+
 export default {
 name: 'SearchView',
 data() {
@@ -32,10 +37,12 @@ components: {
   PeopleSearchList,
 },
 computed: {
-  movieSearchResult(){
-    return this.$store.state.movieSearchList
+  searchKeyword(){
+    return this.$store.getters.search_keyword
   }
-}
+},
+
+
 }
 </script>
 

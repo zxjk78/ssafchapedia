@@ -4,10 +4,10 @@
     <MovieCardList/>
     <div class="popular-list row row-cols-1 row-cols-md-5 gy-3">
 
-    <MovieDetail
+    <!-- <MovieDetail
         v-for="(movie, idx) in movies"
         :key="idx"
-        :movie="movie"/>
+        :movie="movie"/> -->
     <MovieRecommend/>
     </div>
 
@@ -19,7 +19,7 @@ import {fetchArticleList} from '@/api/index.js'
 // import MovieCard from '@/components/MovieCard.vue'
 import MovieCardList from '@/components/home/MovieCardList.vue'
 import MovieRecommend from '@/components/home/MovieRecommend.vue'
-import MovieDetail from '@/components/detail/MovieDetail.vue'
+// import MovieDetail from '@/components/detail/MovieDetail.vue'
 
 export default {
   name: 'HomeView',
@@ -27,7 +27,7 @@ export default {
     // MovieCard,
     MovieCardList,
     MovieRecommend,
-    MovieDetail,
+    // MovieDetail,
   },
   async created(){
     //1.API 서버로 게시글 목록 요청

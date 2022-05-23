@@ -20,4 +20,6 @@ class Movie(models.Model):
     original_language = models.CharField(max_length=100)
     popularity = models.FloatField(null=True, blank=True)
     vote_count = models.IntegerField(null=True, blank=True)
-    vote_average = models.FloatField(null=True, blank=True) 
+    vote_average = models.FloatField(null=True, blank=True)
+    # director = models.ForeignKey(Director, null=True, blank=True on_delete=models.CASCADE) 
+    director = models.ForeignKey(Director,on_delete=models.CASCADE, null=True) 

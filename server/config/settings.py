@@ -44,14 +44,10 @@ INSTALLED_APPS = [
     # Third-party packages
     'django_seed',
     'corsheaders',
-    # swagger
-    'drf_yasg',
 
     'rest_framework',
     'rest_framework.authtoken',
 
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
 
     # allauth
     'allauth', 
@@ -62,6 +58,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
     
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    # swagger
+    'drf_yasg',
     # Django cores
     'django.contrib.sites',
     'django.contrib.admin',
@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -105,13 +106,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -150,9 +145,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'ko-KR'
+# LANGUAGE_CODE = 'ko-KR'
 
-TIME_ZONE = 'Asia/Seoul'
+# TIME_ZONE = 'Asia/Seoul'
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -184,30 +183,28 @@ CORS_ALLOWED_ORIGINS = [
 # Allauth 설정 (registration)
 ACCOUNT_EMAIL_VERIFICATION = None
 
-SITE_ID = 1
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.AllowAny',
-    # ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ]
+
 }
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 # ACCOUNT_LOGOUT_ON_GET = True
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 
-AUTHENTICATION_BACKENDS = [
-    
+AUTHENTICATION_BACKENDS = [    
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
     # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-    
+    'allauth.account.auth_backends.AuthenticationBackend',    
 ]
-SITE_ID = 1
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -221,7 +218,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # 이렇게 됨으로써 api로 통신만 한다는 서버의 역할에서 좀 어긋나게 됨 
-LOGIN_REDIRECT_URL = 'http://localhost:8080/' # 로그인 후 리디렉션할 페이지
+# LOGIN_REDIRECT_URL = 'http://localhost:8080/' # 로그인 후 리디렉션할 페이지
 
 # ACCOUNT_LOGOUT_REDIRECT_URL = "index"  # 로그아웃 후 리디렉션 할 페이지
 # ACCOUNT_LOGOUT_ON_GET = True # 로그아웃 버튼 클릭 시 자동 로그아웃

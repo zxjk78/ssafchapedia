@@ -8,8 +8,8 @@ class Review(models.Model):
     user = models.ForeignKey(user, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     
-    title = models.CharField(max_length=100)
-    content = models.TextField()
+    title = models.CharField(max_length=100, null=True)
+    content = models.TextField(null=True)
     
     directing = models.IntegerField()
     music = models.IntegerField()
