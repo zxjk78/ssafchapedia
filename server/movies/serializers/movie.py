@@ -3,6 +3,10 @@ from rest_framework import serializers
 from ..models import Genre, Movie
 from people.models import  Cast, Actor
 
+# class CastSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Cast
+#         fields=('id','actor','movie',)
 class MovieListSerializer(serializers.ModelSerializer):
     
     
@@ -19,7 +23,7 @@ class MovieListSerializer(serializers.ModelSerializer):
             model = Cast
             # fields = ('actor', 'movie','character')
 
-            fields = ('actor','movie',)
+            fields = ('actor',)
     cast_set = CastSerializer(read_only = True)
 
     class Meta:
@@ -37,7 +41,6 @@ class MovieListSerializer(serializers.ModelSerializer):
             'original_title',
             'original_language',
             'popularity',
-            'director',
             'cast_set',
         )
 
