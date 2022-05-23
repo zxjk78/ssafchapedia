@@ -6,7 +6,8 @@ from rest_framework.response import Response
 
 from .models import Movie, Genre
 from people.models import Actor, Cast
-from .serializers.movie import MovieListSerializer, MovieSearchSerializer 
+from .serializers.movie import MovieListSerializer, MovieSearchSerializer
+from tmdb import URLMaker
 # Create your views here.
 @api_view(['GET'])
 def movie_list(request):
@@ -27,8 +28,10 @@ def movie_detail(request,movie_pk):
 @api_view(['GET'])
 def movie_cast(request,movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk) #ex)11번 json-> tmdb영화아이디->cast 영화아이디에 맞는 배우->actor 배우탐색
-    serializer = MovieListSerializer.CastSerializer(movie)
-    print(serializer)
+    url = f'https://api.themoviedb.org/3/movie/{movie_pk}/credits?api_key=b083ba699306944d1930bb483794ede6&language=ko-KR'
+    # print(request.get(url).json())
+    serializer = MovieListSerializer(movie)
+    #print(url)
     return Response(serializer.data,status=status.HTTP_200_OK)
 
 @api_view(['GET'])

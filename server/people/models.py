@@ -1,11 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class Director(models.Model):
-    name = models.CharField(max_length=40)
-    popularity = models.FloatField()
-    profile_path = models.CharField(max_length=200)
-
 
 class Actor(models.Model):
     actor_id = models.IntegerField()
