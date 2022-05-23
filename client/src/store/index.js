@@ -13,7 +13,7 @@ export default new Vuex.Store({
 
     searchKeyword : '',
     //영화 리스트 받아오기
-    movies_list:[],
+    movies:[],
     // 로그인, 회원가입폼 modal에 사용되는 변수
     loginModal: false,
     signupModal: false,
@@ -60,7 +60,7 @@ export default new Vuex.Store({
     
     //영화리스트
     GET_MOVIES(state, res) {
-      state.movies_list = res
+      state.movies = res
     },
   },
   actions: {
