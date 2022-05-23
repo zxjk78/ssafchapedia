@@ -43,27 +43,7 @@ class MovieListSerializer(serializers.ModelSerializer):
             'cast_set',
         )
 
-# class MovieSearchSerializer(serializers.ModelSerializer): // 배열로 있는 genre_ids를 똑같이 배열로 뱉고 싶으면 고민좀 더해보기
-    
-#     genres = serializers.SerializerMethodField()
 
-
-#     class Meta:
-#         model = Movie
-#         fields = (
-#             'title', 
-#             'genres',
-#             'vote_average',
-#             'release_date',
-#             'poster_path',
-#         )
-    
-#     def get_genres(self, obj):
-#         print('serializer 입니다.')
-#         print(obj)
-#         genres =  obj.objects.filter('genre__genre' in obj.genre_ids)
-        
-#         return genres
 
 class MovieSearchSerializer(serializers.ModelSerializer):
     
