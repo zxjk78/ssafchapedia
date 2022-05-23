@@ -11,8 +11,9 @@ const MOVIE_URL = '/movies/movie'
 const ACTOR_SEARCH_LIST_URL = '/people/search'
 
 // review
+const REVIEW_URL = '/reviews/'
 const REVIEW_LIST_URL = '/reviews/'
-const REVIEW_CREATE_URL = '/reviews/new/'
+// const REVIEW_CREATE_URL = '/reviews/new/'
 const axiosInstance = axios.create({
   baseURL:'http://localhost:8000/api/v1',
 })
@@ -75,8 +76,12 @@ const fetchReviewList = async () => {
   return res
 }
 
-const createReview = async (body) => {
-  const res = await axiosInstance.post(REVIEW_CREATE_URL, body)
+const createReview = async (movieId, body) => {
+  const res = await axiosInstance.post(REVIEW_URL + movieId + `/new/`, body)
+  return res
+}
+const updateReview = async (movieId, body) => {
+  const res = await axiosInstance.put(REVIEW_URL + movieId + `/new/`, body)
   return res
 }
 
@@ -97,4 +102,5 @@ export {
   //review
   fetchReviewList,
   createReview,
+  updateReview,
 }

@@ -26,7 +26,7 @@ class ActorSearchSerializer(serializers.ModelSerializer):
 
 class ActorDetailSerializer(serializers.ModelSerializer):
     
-    # movies = serializers.SerializerMethodField()
+    movies = serializers.SerializerMethodField()
 
     class Meta:
         model = Actor
@@ -38,18 +38,18 @@ class ActorDetailSerializer(serializers.ModelSerializer):
             'movies',
         )
 
-    # def get_movies(self, Actor):
-    #     result = []
-    #     # movies = Movie.objects.filter(actors=Actor)
-    #     movies= None
-    #     tmp = None
-    #     for movie in movies:
-    #         tmp = dict()
-    #         tmp['id'] = movie.id
-    #         tmp['poster_path'] = movie.poster_path
-    #         tmp['title'] = movie.title
+    def get_movies(self, Actor):
+        result = []
+        # movies= None
+        movies = Movie.objects.filter(actors=Actor)
+        tmp = None
+        for movie in movies:
+            tmp = dict()
+            tmp['id'] = movie.id
+            tmp['poster_path'] = movie.poster_path
+            tmp['title'] = movie.title
 
-    #         result.push(tmp)
-    #     return result
+            result.append(tmp)
+        return result
 
 

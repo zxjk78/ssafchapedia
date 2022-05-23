@@ -6,7 +6,8 @@ import SignupView from '@/views/SignupView'
 import LoginView from '@/views/LoginView'
 import ProfileView from '@/views/ProfileView'
 import SearchView from '@/views/SearchView'
-import ReviewCreateView from '@/views/ReviewCreateView'
+import ReviewScoreView from '@/views/ReviewScoreView'
+import ReviewDetailView from '@/views/ReviewDetailView'
 // import NaverLoginAccessView from '@/views/NaverLoginAccessView'
 // import GoogleLoginAccessView from '@/views/GoogleLoginAccessView'
 
@@ -43,7 +44,13 @@ const routes = [
   {
     path: '/:movieId/review/new', //=> http://localhost:8080/:movieId/review/new
     name: 'review_new',
-    component: ReviewCreateView,
+    component: ReviewScoreView,
+
+  },
+  {
+    path: '/:movieId/review/new/detail', //=> http://localhost:8080/:movieId/review/new
+    name: 'review_new_detail',
+    component: ReviewDetailView,
 
   },
 
