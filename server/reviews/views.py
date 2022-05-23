@@ -1,5 +1,5 @@
 import imp
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import get_user_model
 from uritemplate import partial
 from .serializers.review import ReviewListSerializer, ReviewSerializer
@@ -23,29 +23,37 @@ def review_list(request, movie_pk):
     return Response(serializer.data)
 
 @authentication_classes([IsAuthenticated])
-@swagger_auto_schema(methods=['POST'], request_body=ReviewSerializer)
-@api_view(['POST'])
+@swagger_auto_schema(methods=['POST','PUT'], request_body=ReviewSerializer)
+@api_view(['POST','PUT'])
 def review_create(request, movie_pk):
     user = request.user
-    movie = Movie.objects.get(pk=movie_pk)
-    serializer =  ReviewSerializer(data=request.data)
-    # 저장 단계 전에 외래키 필드값의 부재에 오류 안나게 하려면 serializer에서 read_only 옵션이나 read_only_fields 작성
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie, user=user)    
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    movie = get_object_or_404(Movie, pk=movie_pk)  
 
+    if request.method == 'POST':
+        # 저장 단계 전에 외래키 필드값의 부재에 오류 안나게 하려면 serializer에서 read_only 옵션이나 read_only_fields 작성
+        serializer =  ReviewSerializer(data=request.data)   
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie, user=user)    
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == 'PUT':
+        # 이전에는 내용에 대한 저장을 안했기 때문에, 리뷰 객체를 불러와서 update해야한다.
+        review = get_object_or_404(Review, user=user, movie=movie)
+        serializer = ReviewSerializer(review, data= request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()    
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-@authentication_classes([IsAuthenticated])
-@swagger_auto_schema(methods=['PUT'], request_body=ReviewSerializer)
-@api_view(['PUT'])
-def review_update_detail(request, movie_pk):
-    user = request.user
-    movie = Movie.objects.get(pk=movie_pk)
-    # 이전에는 내용에 대한 저장을 안했기 때문에, 리뷰 객체를 불러와서 update해야한다.
-    review = Review.objects.get(user=user, movie=movie) # reviewPK를 페이지에서 던져준다음 받던가, 아니면 user, movie로 조회하던가
-    serializer =  ReviewSerializer(review, data=request.data, partial=True)
-    # 저장 단계 전에 외래키 필드값의 부재에 오류 안나게 하려면 serializer에서 read_only 옵션이나 read_only_fields 작성
-    if serializer.is_valid(raise_exception=True):
-        serializer.save()    
-    return Response(serializer.data, status=status.HTTP_206_PARTIAL_CONTENT)
+# @authentication_classes([IsAuthenticated])
+# @swagger_auto_schema(methods=['PUT'], request_body=ReviewSerializer)
+# @api_view(['PUT'])
+# def review_update_detail(request, movie_pk):
+#     user = request.user
+#     movie = Movie.objects.get(pk=movie_pk)
+#     # 이전에는 내용에 대한 저장을 안했기 때문에, 리뷰 객체를 불러와서 update해야한다.
+#     review = Review.objects.get(user=user, movie=movie) # reviewPK를 페이지에서 던져준다음 받던가, 아니면 user, movie로 조회하던가
+#     serializer =  ReviewSerializer(review, data=request.data, partial=True)
+#     # 저장 단계 전에 외래키 필드값의 부재에 오류 안나게 하려면 serializer에서 read_only 옵션이나 read_only_fields 작성
+#     if serializer.is_valid(raise_exception=True):
+#         serializer.save()    
+#     return Response(serializer.data, status=status.HTTP_206_PARTIAL_CONTENT)
 
