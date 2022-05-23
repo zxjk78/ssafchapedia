@@ -20,9 +20,9 @@
 
     <VueSlickCarousel v-bind="settings" class="mx-6">
       <MovieCard
-      v-for="movie in movies"
-      :key="movie.id"
-      :movies_list="movies_list"
+      v-for="(movie,id) in movies"
+      :key="id"
+      :movie="movie"
       />
 
 
@@ -79,9 +79,9 @@
     },
     },  
     computed:{
-      ...mapGetters([
-        'movies'
-      ])
+      ...mapGetters({
+        movies:'movies'
+    })
     },
     created(){
       this.$store.dispatch('getMovies',this.setToken())
