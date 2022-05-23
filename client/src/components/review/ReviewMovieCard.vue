@@ -46,7 +46,7 @@ computed: {
 async created(){
   const movie = await fetchMovie(this.movieId)
   this.movieInfo = movie.data
-
+  console.log(movie.data)
   }
 }
 </script>

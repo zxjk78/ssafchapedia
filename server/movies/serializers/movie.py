@@ -37,7 +37,6 @@ class MovieListSerializer(serializers.ModelSerializer):
             'original_title',
             'original_language',
             'popularity',
-            'director',
             'cast_set',
         )
 
