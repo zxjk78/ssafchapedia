@@ -177,7 +177,6 @@ AUTH_USER_MODEL = 'accounts.User'
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8080', # 로컬 vue 서버
     'http://localhost:8080', # 로컬 vue 서버
-    
     #'https://jaehozzang.com', # 프로덕션 vue 서버
 ]
 
@@ -192,6 +191,7 @@ REST_FRAMEWORK = {
         #   'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.AllowAny',
     ]
+
 }
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
