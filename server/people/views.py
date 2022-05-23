@@ -10,6 +10,7 @@ from .serializers.actor import ActorSearchSerializer, ActorDetailSerializer
 # swagger
 from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
+
 # @api_view(['GET'])
 # def people(request):
 #     if request.method=='GET':

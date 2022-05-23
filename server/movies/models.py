@@ -8,8 +8,6 @@ class Genre(models.Model):
     genre = models.CharField(max_length=20)
 
 class Movie(models.Model):
-    pk = models.IntegerField()
-
     genre_ids = models.ManyToManyField(Genre)
     poster_path = models.CharField(max_length=200, blank=True, null=True)
     adult = models.BooleanField()
@@ -21,5 +19,4 @@ class Movie(models.Model):
     popularity = models.FloatField(null=True, blank=True)
     vote_count = models.IntegerField(null=True, blank=True)
     vote_average = models.FloatField(null=True, blank=True)
-    # director = models.ForeignKey(Director, null=True, blank=True on_delete=models.CASCADE) 
-    director = models.ForeignKey(Director,on_delete=models.CASCADE, null=True) 
+    
