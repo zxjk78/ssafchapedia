@@ -15,6 +15,7 @@ def movie_list(request):
     if request.method=='GET':
         movies = Movie.objects.order_by('-popularity')[:50]
         serializer = MovieListSerializer(movies,many=True)
+        print(movies)
         return Response(serializer.data,status=status.HTTP_200_OK)
 
 @api_view(['GET'])
