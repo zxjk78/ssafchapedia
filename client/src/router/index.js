@@ -6,6 +6,9 @@ import SignupView from '@/views/SignupView'
 import LoginView from '@/views/LoginView'
 import ProfileView from '@/views/ProfileView'
 import SearchView from '@/views/SearchView'
+import ReviewCreateView from '@/views/ReviewCreateView'
+// import NaverLoginAccessView from '@/views/NaverLoginAccessView'
+// import GoogleLoginAccessView from '@/views/GoogleLoginAccessView'
 
 Vue.use(VueRouter)
 
@@ -37,6 +40,16 @@ const routes = [
     name: 'search',
     component: SearchView,
   },
+  {
+    path: '/:movieId/review/new', //=> http://localhost:8080/:movieId/review/new
+    name: 'review_new',
+    component: ReviewCreateView,
+
+  },
+
+
+
+
 ]
 
 const router = new VueRouter({

@@ -29,6 +29,7 @@ def movie_random(request):
     serializer = MovieListSerializer(movies,many=True)
     return Response(serializer.data,status=status.HTTP_200_OK)
 
+# 요청이 가면 영화, 배우 둘 다 한번에 json으로 처리해야 되는지, 다른 endpoint에 요청을 보내서 처리해야되는지?
 @api_view(['GET'])
 def movie_search(request):
     keyword = request.GET.get('keyword')
