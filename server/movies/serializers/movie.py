@@ -1,14 +1,11 @@
 from nbformat import read
 from rest_framework import serializers
 from ..models import Genre, Movie
-from people.models import Director, Cast, Actor
+from people.models import  Cast, Actor
 
 class MovieListSerializer(serializers.ModelSerializer):
     
-    class DirectorSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Director
-            fields = ('name', 'profile_path')
+    
 
     class CastSerializer(serializers.ModelSerializer):
         class ActorSerializer(serializers.ModelSerializer):
@@ -22,8 +19,7 @@ class MovieListSerializer(serializers.ModelSerializer):
             model = Cast
             # fields = ('actor', 'movie','character')
 
-            fields = ('actor',)
-    director = DirectorSerializer(read_only=True)
+            fields = ('actor','movie',)
     cast_set = CastSerializer(read_only = True)
 
     class Meta:
