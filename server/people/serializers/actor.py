@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from people.models import Actor
 from movies.models import Movie
+from server.movies.serializers.movie import MovieListSerializer
 
 # class PeopleListSerializer(serializers.ModelSerializer):
     
@@ -11,6 +12,7 @@ from movies.models import Movie
 #             'actor', 
 #             'character',
 #         )
+
 
 class ActorSearchSerializer(serializers.ModelSerializer):
     
