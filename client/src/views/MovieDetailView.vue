@@ -14,9 +14,9 @@
       :movies="MovieInfo.pk"
       :arrType="1"
       />
-    <h1>
+    <!-- <h1>
       {{movieId}}
-    </h1>
+    </h1> -->
     <h1 class="text-2xl font-bold">전체</h1>       
       <!-- <MovieDetail
       v-if="MovieInfo.overview"
