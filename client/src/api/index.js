@@ -90,7 +90,11 @@ const fetchMovie = async (movieId) => {
   return res
 }
 
-
+const fetchMovieList = async () => {
+  const movieURL = MOVIE_URL + '/'
+  const res = await axiosInstance.get(movieURL)
+  return res
+}
 
 
 //people
@@ -140,6 +144,7 @@ export {
   //movie
   fetchMovie,
   fetchMovieSearchList,
+  fetchMovieList,
   //people
   fetchActorSearchList,
   fetchActorDetail,

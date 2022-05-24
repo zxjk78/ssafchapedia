@@ -18,25 +18,25 @@
     </div>
     <div class="mx-6">
 
-    <VueSlickCarousel v-if="MovieInfo" v-bind="settings" class="mx-6">
+    <VueSlickCarousel v-bind="settings" class="mx-6">
       <MovieCard
-      v-for="(movie,idx) in movieCnt"
-      :key="idx"
-      :movie='movie'
-      :idx='idx'
+      v-for="movie in movies"
+      :movie="movie"
+      :key="movie.id"
       />
-      <MovieDetail
+      <!-- <MovieDetail
       v-if="MovieInfo.pk"
       :movies="MovieInfo.pk"
       :arrType="1"
-      />
-
+      /> -->
     </VueSlickCarousel>
 
     <!-- 테스트용 -->
-    <!-- 안녕안녕: {{getMovie()}}  -->
+    {{movies}}
     </div>
+    
   </div>
+  
 </template>
 
 <script>
@@ -45,8 +45,10 @@
   import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-  import {fetchMovie} from '@/api/index.js'
-  import {mapGetters} from 'vuex'
+  // import {fetchMovieList} from '@/api/index.js'
+  // import {mapState} from 'vuex'
+
+
   export default {
     name: 'MyComponent',
     data(){
@@ -61,10 +63,16 @@
             slidesToScroll: 5,
             
           },
-        MovieId:this.$route.params.movieId,
-        MovieInfo: '',
-        movieCnt: ''
+        // Movie:this.$route.params,
+        // MovieInfo: '',
+        // movieCnt: ''
       }
+    },
+    props:{
+      movies:{
+        type:Array,
+        required:true
+      },
     },
     components: { 
       VueSlickCarousel,
@@ -100,21 +108,18 @@
         //   },
         },
     computed:{
-      ...mapGetters({
-        movies:'movies'
-    })
+      // ...mapState(['MovieInfo']),
+      // movielist: function(){
+      //   return this.movies
+      // }
     },
-    // created(){
-    //   this.$store.dispatch('getMovies',this.setToken())
-    //   // this.$store.dispatch('getMovies')
-    //   // this.getMovie()
-    // },
-    async created(){
-    const movie = await fetchMovie(this.MovieId)
-    this.MovieInfo = movie.data
-    this.movieCnt= movie.data.title.length
+
+    // async created(){
+    // const movielist = await fetchMovieList(this.Movie)
+    // this.MovieInfo = movielist.data
+    // this.movieCnt= movielist.data.title.length
   }
-  }
+
 </script>
 
 <style scoped>
