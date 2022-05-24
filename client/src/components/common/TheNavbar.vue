@@ -21,8 +21,8 @@
         account_circle
         </span>
         
-        <!-- <router-link :to="{name:'profile'}" class="bg-yello-400">마이페이지</router-link> -->
-        <button class="bg-yello-400" @click="getMyInfo">마이페이지</button>
+        <router-link :to="{name:'profile', params:{username:userName}}" class="bg-yello-400">마이페이지</router-link>
+        <!-- <button class="bg-yello-400">마이페이지</button> -->
         <button class="border-2 border-yellow-400	" @click="logout">로그아웃</button>
       </div>
       <div v-else class="w-56 flex justify-around">
@@ -48,7 +48,6 @@
 <script>
 import LoginForm from '@/components/common/LoginForm.vue'
 import SignupForm from '@/components/common/SignupForm.vue'
-import {getMyInfo} from '@/api/index.js'
 import _ from 'lodash'
 
 export default {
@@ -57,6 +56,7 @@ data(){
   return {
     showLogin: this.$store.state.loginModal, 
     showSignup: this.$store.state.loginModal, 
+    userName: localStorage.getItem('username'),
     
 } 
 },
@@ -89,11 +89,7 @@ methods: {
   logout(){
     this.$store.commit('LOGOUT')
   },
-  async getMyInfo(){
-    const res = await getMyInfo()
-    this.$store.commit('SET_USERNAME', res.data.username)
-    this.$router.push({name:'profile', params:{username: this.$store.state.username}})
-  },
+
 
 
 

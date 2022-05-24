@@ -3,11 +3,12 @@ import axios from 'axios'
 // auth: dj-rest-auth 의 토큰 기반 인증 기능 이용
 const LOGIN_URL = '/auth/login/'
 const SIGNUP_URL = '/auth/signup/'
+const GET_USER_INFO = '/auth/user/'
 
 // accounts
 const ACCOUNT_URL = '/accounts/' 
 const PROFILE_URL = '/profile/'
-const MYINFO_URL = '/accounts/myinfo/'
+// const MYINFO_URL = '/accounts/myinfo/'
 // const PROFILE_URL = '/accounts/<str:username>/profile'
 
 //DEFAULT_URL은 중간에 pk 등이 들어갈 때도 사용 가능
@@ -65,11 +66,9 @@ const signup = async (body) => {
   return res 
 }
 
-//account
-
-const getMyInfo = async ()=> {
-  const res = await axiosInstance.get(MYINFO_URL)
-  return res
+const getMyInfo = async () => {
+  const res = await axiosInstance.get(GET_USER_INFO)
+  return res 
 }
 
 const fetchUserProfile = async (username)=> {
@@ -112,8 +111,8 @@ const fetchReviewList = async () => {
   return res
 }
 
-const fetchUserReviewList = async (username) => {
-  const res = await axiosInstance.get(REVIEW_LIST_URL + username + '/list/')
+const fetchUserReviewList = async (username, page) => {
+  const res = await axiosInstance.get(REVIEW_LIST_URL + username + '/list/', {params:{page: page}})
   return res
 }
 

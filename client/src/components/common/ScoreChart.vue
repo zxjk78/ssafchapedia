@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div id="chartdiv"></div>
+    <div :id="chartTag" style="width: 100%; height: 400px;"></div>
 
   </div>
 </template>
@@ -17,22 +17,22 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 export default {
 name: 'ScoreChart',
 methods: {
-  drawChart(sscores){
+  drawChart(sscores, chartId){
     
     
 am5.ready(function() {
 
 // Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-let root = am5.Root.new("chartdiv");
-
-
+let root = am5.Root.new(`chartDiv${chartId}`);
+// console.log(root)
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
 root.setThemes([
   am5themes_Animated.new(root)
 ]);
 
+  
 
 // Create chart
 // https://www.amcharts.com/docs/v5/charts/radar-chart/
@@ -143,26 +143,38 @@ series.appear(1000);
 chart.appear(1000, 100);
 
 }); // end am5.ready()
+
+
+
+
   }
 },
   props:{
     sscores: {
       type:Object,
       required: true,
+    },
+    chartId: {
+      type:Number,
+      required: true,
+    }
+
+  },
+  computed:{
+    chartTag(){
+      return 'chartDiv'+this.chartId
     }
   },
 async mounted(){
-  console.log('mounted')
-  this.drawChart(this.sscores)
+  // console.log('mounted')
+  // console.log(this.chartId)
+  this.drawChart(this.sscores, this.chartId)
 },
 }
 </script>
 
 <!-- Styles -->
-<style>
-#chartdiv {
-  width: 100%;
-  height: 400px;
-}
+<style scoped>
+
 </style>
 

@@ -50,10 +50,10 @@ urlpatterns = [
     path('api/v1/people/',include('people.urls')),
     
     
-
+    # dj-rest-auth 기능
     path('api/v1/auth/', include('dj_rest_auth.urls')), 
     path('api/v1/auth/signup/', include('dj_rest_auth.registration.urls')),
-
+    
     # swagger
     path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
 

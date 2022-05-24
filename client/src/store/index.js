@@ -20,7 +20,7 @@ export default new Vuex.Store({
     movieList:[],
     movieTitles:[],
     reviews:[],
-
+    rootDiv: null,
     // 로그인, 회원가입폼 modal에 사용되는 변수
     loginModal: false,
     signupModal: false,
@@ -65,6 +65,8 @@ export default new Vuex.Store({
     },
     SET_USERNAME(state, username){
       state.username = username
+      localStorage.setItem('username', username)
+
     },
     SET_SEARCH_KEYWORD(state, keyword){
       state.searchKeyword = keyword
@@ -73,6 +75,7 @@ export default new Vuex.Store({
       // 1. DB에서 해당 authToken 삭제
       // 2. localstorage에서 해당 authToken 삭제
       localStorage.setItem('authToken', '')
+      localStorage.setItem('username', '')
       // 3. vuex state 에서 해당 authToken 삭제
       state.authToken = ''
     },

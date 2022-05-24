@@ -43,6 +43,8 @@
 <script>
 import SocialLogin from '@/components/common/SocialLogin.vue'
 import {login} from '@/api/index.js'
+import {getMyInfo} from '@/api/index.js'
+
 export default {
 name: 'LoginForm',
 data(){ 
@@ -64,14 +66,26 @@ methods: {
     if (e.target == back)
     this.$store.commit('TOGGLE_LOGIN_MODAL')
   },
+  // async getMyInfo(){
+  //   const res = await getMyInfo()
+    
+  //   this.$store.commit('SET_USERNAME', res.data.username)
+  //   this.$router.push({name:'profile', params:{username: this.$store.state.username}})
+  // },
   async onSubmit(){
     // 1. 로그인 정보를 담은 객체를 api.js의 해당하는 함수에 전달 후 
     try {
       const res = await login(this.loginInfo)
-      console.log(res)
-      // 2. 성공하면 응답에 담긴 token을 localstorage, vuex store state에 저장, 로그인폼 끄기
+      // 2. 성공하면 응답에 담긴 token을 localstorage, vuex store state에 저장,  
 
       this.$store.commit('SET_AUTH_TOKEN', res.data.key)
+      
+      const res2 = await getMyInfo()
+      // this.$router.push({name:'profile', params:{username: this.$store.state.username}})
+      //2-2. user정보 중 username만을 가져와서 vuex state에 저장
+
+      this.$store.commit('SET_USERNAME', res2.data.username)
+      // 2-3. 새로고침으로 로그인폼 끄는 효과 만들기
       //vue 새로고침 함수는 this.$router.go()
       this.$router.go()
     } catch (error) {
