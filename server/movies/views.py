@@ -1,12 +1,17 @@
+from collections import Counter
 from django.shortcuts import render,get_object_or_404
-
+from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.permissions import IsAuthenticated
 
+from rest_framework.response import Response
 from .models import Movie, Genre
-from people.models import Actor
-from .serializers.movie import MovieListSerializer, MovieSearchSerializer
+from people.models import Actor, Cast
+from .serializers.movie import MovieListSerializer, MovieSearchSerializer, MovieRecommendSerializer
+# swagger
+from drf_yasg.utils import swagger_auto_schema
+
 
 # Create your views here.
 @api_view(['GET'])
