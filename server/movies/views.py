@@ -39,7 +39,6 @@ def movie_random(request):
     serializer = MovieListSerializer(movies,many=True)
     return Response(serializer.data,status=status.HTTP_200_OK)
 
-# 요청이 가면 영화, 배우 둘 다 한번에 json으로 처리해야 되는지, 다른 endpoint에 요청을 보내서 처리해야되는지?
 @api_view(['GET'])
 def movie_search(request):
     keyword = request.GET.get('keyword')
@@ -48,3 +47,26 @@ def movie_search(request):
 
     serializer = MovieSearchSerializer(movies, many=True)
     return Response(serializer.data,status=status.HTTP_200_OK)
+
+# 이부분 인터셉터로 토큰 들여보내고 나서 테스트해볼것
+@authentication_classes([IsAuthenticated])
+@swagger_auto_schema(methods=['GET'], request_body=MovieRecommendSerializer)
+@api_view(['GET'])
+def movie_recommend(request):
+    user = request.user    
+    print(user)
+    user_reviewed_movies = list(user.review_set.all().values_list('movie', flat=True)) 
+
+    genre_cnt_list = []
+    for movie_no in user_reviewed_movies:
+        movie = Movie.objects.get(pk=movie_no)
+        genres = movie.genre_ids.all()
+        for genre in genres:
+            genre_cnt_list.append(genre.pk)
+        
+    action_code = Counter(genre_cnt_list).most_common(1)[0][0]
+    movie_recommend = Movie.objects.filter(genre_ids = action_code).exclude(id__in=user_reviewed_movies).order_by('-vote_average')[:10]
+
+
+    serializer = MovieRecommendSerializer(movie_recommend, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
