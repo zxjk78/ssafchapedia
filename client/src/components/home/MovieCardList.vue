@@ -20,7 +20,7 @@
 
     <VueSlickCarousel v-bind="settings" class="mx-6">
       <MovieCard
-      v-for="movie in movielist"
+      v-for="movie in movies"
       :movie="movie"
       :key="movie.id"
       />
@@ -32,7 +32,7 @@
     </VueSlickCarousel>
 
     <!-- 테스트용 -->
-    
+    {{movies}}
     </div>
     
   </div>
@@ -46,7 +46,7 @@
 
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
   // import {fetchMovieList} from '@/api/index.js'
-  import {mapState} from 'vuex'
+  // import {mapState} from 'vuex'
 
 
   export default {
@@ -108,10 +108,10 @@
         //   },
         },
     computed:{
-      ...mapState(['MovieInfo']),
-      movielist: function(){
-        return this.movies
-      }
+      // ...mapState(['MovieInfo']),
+      // movielist: function(){
+      //   return this.movies
+      // }
     },
 
     // async created(){
