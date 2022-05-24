@@ -68,14 +68,7 @@
               해당 영화는 줄거리가 제공되지 않습니다.
             </div>
           </div>
-          <!-- <div class="movie-detail-lower"> -->
-            <!-- youtube -->
-            <!-- <div class="movie-youtube-area">
-              관련 영상
-              <hr> -->
-              <!-- <YoutubeList :title="movie.title"/> -->
-            <!-- </div> -->
-          <!-- </div> -->
+
         </div>
       </div>
     </div>

@@ -8,23 +8,6 @@ from people.models import  Cast, Actor
 #         model = Cast
 #         fields=('id','actor','movie',)
 class MovieListSerializer(serializers.ModelSerializer):
-    
-    
-
-    class CastSerializer(serializers.ModelSerializer):
-        class ActorSerializer(serializers.ModelSerializer):
-            class Meta:
-                model = Actor
-                fields = ('name', 'popularity', 'profile_path')
-                
-        actor = ActorSerializer(read_only=True)
-        
-        class Meta:
-            model = Cast
-            # fields = ('actor', 'movie','character')
-
-            fields = ('actor',)
-    cast_set = CastSerializer(read_only = True)
 
     class Meta:
         model = Movie
@@ -41,7 +24,7 @@ class MovieListSerializer(serializers.ModelSerializer):
             'original_title',
             'original_language',
             'popularity',
-            'cast_set',
+            'actors',
         )
 
 
