@@ -41,12 +41,3 @@ def user_review(request, username):
     user = get_user_model().objects.get(username=username)    
     serializer = UserReviewListSerializer(user)
     return Response(serializer.data)
-
-@swagger_auto_schema(methods=['GET',])
-@authentication_classes([IsAuthenticated])
-@api_view(['GET'])
-def myinfo(request):
-    print(request.user)
-    user = get_user_model().objects.get(username=request.user)    
-    serializer = MyinfoSerializer(user)
-    return Response(serializer.data)
