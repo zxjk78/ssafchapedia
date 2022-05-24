@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from .models import Movie, Genre
 from people.models import Actor, Cast
@@ -12,6 +12,9 @@ from .serializers.movie import MovieListSerializer, MovieSearchSerializer, Movie
 # swagger
 from drf_yasg.utils import swagger_auto_schema
 
+class ListMovieView(ListAPIView):
+    queryset = Movie.objects.all().order_by('-popularity')
+    serializer_class = MovieListSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -29,14 +32,6 @@ def movie_detail(request,movie_pk):
     serializer = MovieListSerializer(movie)
     return Response(serializer.data)
 
-# #영화 출연 배우 목록 조회
-# @api_view(['GET'])
-# def movie_cast(request,movie_pk):
-#     movie = get_object_or_404(Movie, pk=movie_pk)
-#     #url = f'https://api.themoviedb.org/3/movie/{movie_pk}/credits?api_key=b083ba699306944d1930bb483794ede6&language=ko-KR'
-#     # print(request.get(url).json())
-#     serializer = MovieListSerializer(movie)
-#     return Response(serializer.data,status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def movie_random(request):
@@ -55,7 +50,7 @@ def movie_search(request):
 
 # 이부분 인터셉터로 토큰 들여보내고 나서 테스트해볼것
 @authentication_classes([IsAuthenticated])
-@swagger_auto_schema(methods=['GET'], request_body=MovieRecommendSerializer)
+@swagger_auto_schema(methods=['GET'])
 @api_view(['GET'])
 def movie_recommend(request):
     user = request.user    

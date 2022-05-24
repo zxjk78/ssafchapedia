@@ -20,7 +20,7 @@ export default new Vuex.Store({
     movieList:[],
     movieTitles:[],
     reviews:[],
-
+    rootDiv: null,
     // 로그인, 회원가입폼 modal에 사용되는 변수
     loginModal: false,
     signupModal: false,

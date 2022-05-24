@@ -6,12 +6,23 @@ from movies.models import Movie
 from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.generics import ListAPIView
+
 from rest_framework import status
-from rest_framework.pagination import CursorPagination
 # swagger
 from drf_yasg.utils import swagger_auto_schema
 
 # Create your views here.
+@swagger_auto_schema(methods=['GET'])
+class UserReviewDetailView(ListAPIView):
+    serializer_class = ReviewDetailSerializer
+    lookup_url_kwarg = 'username'
+    def get_queryset(self):
+        username = self.kwargs.get(self.lookup_url_kwarg)
+        user = get_user_model().objects.get(username=username)
+        reviews = Review.objects.filter(user=user).order_by('-pk')
+        return reviews
+
 
 @swagger_auto_schema(methods=['GET'])
 @api_view(['GET'])
@@ -50,11 +61,11 @@ def review_user_list(request, username):
     serializer = ReviewDetailSerializer(review)
     return Response(serializer.data)
 
-@swagger_auto_schema(methods=['GET'])
-@api_view(['GET'])
-def review_user_list(request, username):
-    user = get_user_model().objects.get(username=username)
-    review = Review.objects.filter(user=user).order_by('-pk')[0:]
-    serializer = ReviewDetailSerializer(review)
-    return Response(serializer.data)
+# @swagger_auto_schema(methods=['GET'])
+# @api_view(['GET'])
+# def review_user_list(request, username):
+#     user = get_user_model().objects.get(username=username)
+#     review = Review.objects.filter(user=user).order_by('-pk')[0:]
+#     serializer = ReviewDetailSerializer(review)
+#     return Response(serializer.data)
 
