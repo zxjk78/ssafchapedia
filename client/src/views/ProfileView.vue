@@ -10,6 +10,8 @@
       유저 이름
     </div>
     <MyMovieList/>
+    <MyReviewList/>
+
 
 
   </div>
@@ -17,12 +19,22 @@
 
 <script>
 import MyMovieList from '@/components/profile/MyMovieList.vue'
+import MyReviewList from '@/components/profile/MyReviewList.vue'
+import {fetchUserProfile} from '@/api/index.js'
 export default {
   name:'ProfileView',
-  data(){return {}},
+  data(){return {
+    username:this.$route.params.username,
+    userInfo : '',
+  }},
   components:{
     MyMovieList,
+    MyReviewList,
   },
+  async created(){
+    const res = await fetchUserProfile(this.username)
+    console.log(res)
+  }
 }
 </script>
 
