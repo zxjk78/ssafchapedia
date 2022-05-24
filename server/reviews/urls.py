@@ -7,5 +7,5 @@ urlpatterns = [
     path('<int:movie_pk>/new/', views.review_create),
     # path('<str:username>/list/', views.review_user_list),
     path('<str:username>/list/', views.UserReviewDetailView.as_view()),
-    
+    # path('<int:movie_pk>/new/detail', views.review_update_detail),
 ]

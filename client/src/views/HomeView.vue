@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <MovieCardList/>
+    <MovieCardList :movies="movies"/>
     <div class="popular-list row row-cols-1 row-cols-md-5 gy-3">
 
     <!-- <MovieDetail
@@ -18,6 +18,7 @@
 // import MovieCard from '@/components/MovieCard.vue'
 import MovieCardList from '@/components/home/MovieCardList.vue'
 import MovieRecommend from '@/components/home/MovieRecommend.vue'
+import axios from 'axios'
 // import MovieDetail from '@/components/detail/MovieDetail.vue'
 
 export default {
@@ -27,6 +28,37 @@ export default {
     MovieCardList,
     MovieRecommend,
     // MovieDetail,
+  },
+  data(){
+    return{
+      movies:[],
+      genres:[]
+    }
+  },
+  methods:{
+    getMovies:function(){
+      const SERVER_IP = 'http://localhost:8080/'
+      axios.get(`${SERVER_IP}/api/v1/movies/`)
+      .then(response=>{
+        this.movies = response.data
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    },
+    // getGenres:function(){
+    //   const SERVER_IP = 'http://localhost:8080/'
+    //   axios.get(`${SERVER_IP}/api/v1/movies/`)
+    //   .then(response=>{
+    //     this.movies = response.data
+    //   })
+    //   .catch(error=>{
+    //     console.log(error)
+    //   })
+    // }
+  },
+  mounted(){
+    this.getMovies()
   },
   async created(){
     //1.API 서버로 게시글 목록 요청
