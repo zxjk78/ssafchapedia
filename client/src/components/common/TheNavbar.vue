@@ -17,15 +17,17 @@
 
         
       <div v-if="isLoggedIn" class="w-56 flex justify-around items-center">
-        <span>USERNAME</span>님
         <span class="material-symbols-outlined text-3xl">
         account_circle
         </span>
+        
+        <!-- <router-link :to="{name:'profile'}" class="bg-yello-400">마이페이지</router-link> -->
+        <button class="bg-yello-400" @click="getMyInfo">마이페이지</button>
         <button class="border-2 border-yellow-400	" @click="logout">로그아웃</button>
       </div>
       <div v-else class="w-56 flex justify-around">
-        <button @click="toggleLoginModal">로그인</button>
-        <button @click="toggleSignupModal" class="p-2 border-2 rounded-lg">회원가입</button>
+        <button class="" @click="toggleLoginModal">로그인</button>
+        <button class="" @click="toggleSignupModal" >회원가입</button>
       </div>
       
       </div>
@@ -46,6 +48,7 @@
 <script>
 import LoginForm from '@/components/common/LoginForm.vue'
 import SignupForm from '@/components/common/SignupForm.vue'
+import {getMyInfo} from '@/api/index.js'
 import _ from 'lodash'
 
 export default {
@@ -54,6 +57,7 @@ data(){
   return {
     showLogin: this.$store.state.loginModal, 
     showSignup: this.$store.state.loginModal, 
+    
 } 
 },
 methods: {
@@ -85,6 +89,11 @@ methods: {
   logout(){
     this.$store.commit('LOGOUT')
   },
+  async getMyInfo(){
+    const res = await getMyInfo()
+    this.$store.commit('SET_USERNAME', res.data.username)
+    this.$router.push({name:'profile', params:{username: this.$store.state.username}})
+  },
 
 
 
@@ -95,6 +104,9 @@ computed: {
       return this.$store.getters.isLoggedIn
       // return true
     },
+  getUserName(){
+    return this.$store.getters.getUserName
+  },
 },
 components: {
   LoginForm,

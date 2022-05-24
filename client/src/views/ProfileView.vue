@@ -1,44 +1,61 @@
 <template>
-  <div>
-    <div class="my-picture">
-      여기 이미지는 DB에서 내가 본 영화 중에서 아무거나 poster path 가져와서 붙이기
-      <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMTRfMjE2%2FMDAxNjQ0ODExMDA1MTI1.EE08QdhHev5V9om2NoY6FNXuOvSw0eprGCHeshrLIugg.u8hy7r21VlaaEvP4UV7nBA3rVjrkxZzqoIyuRPBo4oIg.JPEG.mssixx%2FIMG_1336.JPG&type=sc960_832" 
-      alt="프로필이미지"
-      class="w-12 h-12">
-    </div>
-    <div class="text-3xl">
-      유저 이름
-    </div>
-    <MyMovieList/>
-    <MyReviewList/>
+  <div class="">
+    <!-- <div class="text-3xl">
+      {{userInfo.username}}
+    </div> -->
+    <div class="w-3/4 mx-auto">
+    <!-- <div class="flex justify-between">
+        <div class="text-3xl font-bold">{{userInfo.username}} 님이 본 작품</div> 
+        <div>
+        <span>더보기</span>
+        <span class="material-symbols-outlined">arrow_forward_ios</span>
+        </div>
+    </div> -->
+    <!-- <MyMovieList/> -->
 
+    <div class="flex justify-between mx-auto mb-10 border-b-2	">
+      <div class="text-3xl font-bold">{{userInfo.username}} 님이 리뷰를 남긴 작품들🎥</div>
+      <div class="flex items-center">
+      <span>더보기</span>
+      <span class="material-symbols-outlined">arrow_forward_ios</span>
+      </div>
+    </div>
+
+      <UserReviewDetail
+      :user="userInfo.username"
+      /> 
+    </div>
+      
 
 
   </div>
 </template>
 
 <script>
-import MyMovieList from '@/components/profile/MyMovieList.vue'
-import MyReviewList from '@/components/profile/MyReviewList.vue'
+import UserReviewDetail from '@/components/profile/UserReviewDetail.vue'
 import {fetchUserProfile} from '@/api/index.js'
 export default {
   name:'ProfileView',
   data(){return {
     username:this.$route.params.username,
     userInfo : '',
+    posterPath : '',
   }},
   components:{
-    MyMovieList,
-    MyReviewList,
+    UserReviewDetail,
+  },
+  computed:{
+
   },
   async created(){
     const res = await fetchUserProfile(this.username)
-    console.log(res)
+    this.userInfo = res.data
+    this.posterPath = this.$store.state.tmdbImgUrl + res.data.poster_path
   }
 }
 </script>
 
-<style>
+<style scoped>
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 1,
@@ -46,4 +63,12 @@ export default {
   'GRAD' 0,
   'opsz' 48
 }
+/* .my-picture{
+  
+
+}
+my-picture > img{
+  
+
+} */
 </style>

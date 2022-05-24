@@ -16,16 +16,15 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 export default {
 name: 'ScoreChart',
-
 methods: {
-  drawChart(){
+  drawChart(sscores){
     
-
+    
 am5.ready(function() {
 
 // Create root element
 // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-var root = am5.Root.new("chartdiv");
+let root = am5.Root.new("chartdiv");
 
 
 // Set themes
@@ -37,7 +36,7 @@ root.setThemes([
 
 // Create chart
 // https://www.amcharts.com/docs/v5/charts/radar-chart/
-var chart = root.container.children.push(am5radar.RadarChart.new(root, {
+let chart = root.container.children.push(am5radar.RadarChart.new(root, {
   panX: false,
   panY: false,
   //  wheel 효과 삭제
@@ -45,10 +44,10 @@ var chart = root.container.children.push(am5radar.RadarChart.new(root, {
   // wheelY: "zoomX"
 }));
 
-// Add cursor 마우스 오버시 나타나는 효과, lineX false로 line나오는 것 삭제함
+// Add cursor 마우스 오버시 나타나는 효과, lineX false로 line나오는 것 삭제함 behavor:zoom 삭제시 마우스 클릭해도 안움직임
 // https://www.amcharts.com/docs/v5/charts/radar-chart/#Cursor
-var cursor = chart.set("cursor", am5radar.RadarCursor.new(root, {
-  behavior: "zoomX"
+const cursor = chart.set("cursor", am5radar.RadarCursor.new(root, {
+  // behavior: "zoomX"
 }));
 
 cursor.lineX.set("visible", false);
@@ -63,20 +62,20 @@ xRenderer.labels.template.setAll({
   
 });
 
-var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
   maxDeviation: 0,
   categoryField: "score",
   renderer: xRenderer,
   // tooltip: am5.Tooltip.new(root, {})
 }));
 
-var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
   renderer: am5radar.AxisRendererRadial.new(root, {})
 }));
 //ticks : 말그대로 눈금 말하는거
 let yRenderer = yAxis.get("renderer");
 // yRenderer.ticks.template.setAll({
-//   stroke: am5.color(0xFF0000),
+  //   stroke: am5.color(0xFF0000),
 //   visible: false
 // });
 
@@ -91,7 +90,7 @@ yRenderer.labels.template.setAll({
 
 // Create series
 // https://www.amcharts.com/docs/v5/charts/radar-chart/#Adding_series
-var series = chart.series.push(am5radar.RadarLineSeries.new(root, {
+let series = chart.series.push(am5radar.RadarLineSeries.new(root, {
   name: "Series",
   xAxis: xAxis,
   yAxis: yAxis,
@@ -118,21 +117,21 @@ series.bullets.push(function () {
 
 // Set data
 // https://www.amcharts.com/docs/v5/charts/radar-chart/#Setting_data
-var data = [{
+let data = [{
   "score": "감독연출",
-  "litres": 3
+  "litres": sscores.directing
 }, {
   "score": "스토리",
-  "litres": 3
+  "litres": sscores.story
 }, {
   "score": "영상미",
-  "litres": 2.5
+  "litres": sscores.art
 }, {
   "score": "배우연기",
-  "litres": 1
+  "litres": sscores.acting
 }, {
   "score": "OST",
-  "litres": 1
+  "litres": sscores.music
 },];
 series.data.setAll(data);
 xAxis.data.setAll(data);
@@ -146,8 +145,15 @@ chart.appear(1000, 100);
 }); // end am5.ready()
   }
 },
-mounted(){
-  this.drawChart()
+  props:{
+    sscores: {
+      type:Object,
+      required: true,
+    }
+  },
+async mounted(){
+  console.log('mounted')
+  this.drawChart(this.sscores)
 },
 }
 </script>

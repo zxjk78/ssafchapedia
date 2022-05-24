@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import get_user_model
-from .serializers.review import ReviewListSerializer, ReviewSerializer
+from .serializers.review import ReviewListSerializer, ReviewSerializer, ReviewDetailSerializer
 from .models import Review
 from movies.models import Movie
 from rest_framework.decorators import api_view, authentication_classes
@@ -14,7 +14,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 @swagger_auto_schema(methods=['GET'])
 @api_view(['GET'])
-def review_list(request, movie_pk):
+def review_movie_list(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
     reviews = Review.objects.filter(movie=movie)
     serializer = ReviewListSerializer(reviews, many=True)
@@ -41,5 +41,10 @@ def review_create(request, movie_pk):
             serializer.save()    
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-
+@swagger_auto_schema(methods=['GET'])
+@api_view(['GET'])
+def review_user_list(request, username):
+    user = get_user_model().objects.get(username=username)
+    review = Review.objects.filter(user=user).order_by('-pk')[0]
+    serializer = ReviewDetailSerializer(review)
+    return Response(serializer.data)

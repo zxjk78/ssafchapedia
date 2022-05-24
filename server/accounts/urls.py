@@ -8,4 +8,5 @@ urlpatterns = [
     path('<str:username>/watch/', views.user_watch),
     path('<str:username>/review/', views.user_review),
     path('<str:username>/profile/', views.profile),
+    path('myinfo/', views.myinfo),
 ]

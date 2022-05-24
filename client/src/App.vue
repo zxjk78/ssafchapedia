@@ -37,6 +37,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 /* @import './assets/styles/moviecard.css'; */
+
+/* *:not(html, body) {
+  border: solid 1px black
+} */
+
 </style>

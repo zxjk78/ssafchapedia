@@ -1,4 +1,4 @@
-from attr import field
+import random
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
@@ -14,28 +14,20 @@ class ProfileSerializer(serializers.ModelSerializer):
     # 그래서 하단에  get_review_set(self, obj) 을 적어준 형식이고 obj는 Meta 클래스에서 정의한 model이 들어감
     
     # review_set = serializers.SerializerMethodField()
-
+    poster_path = serializers.SerializerMethodField()
     class Meta:
         model = get_user_model()
         fields = (
             'id', 
             'username', 
+            'poster_path', 
         )
-
-    # # obj는 Meta에서 정의한 모델 = 여기선 user, reviews = get_user_model().review_set.all()과 마찬가지
-    # def get_review_set(self, obj):
-    #     data = []
-    #     reviews = obj.review_set.all()
-    #     review_dict = None
-    #     for review in reviews:
-    #         review_dict = {}
-    #         review_dict['movie'] = review.movie.title
-    #         review_dict['poster'] = review.movie.poster_path
-    #         review_dict['title'] = review.title
-    #         review_dict['content'] = review.content
-    #         data.append(review_dict)
-    #     return data
-
+    def get_poster_path(this, obj):
+        reviews = list(obj.review_set.all())
+        ran = random.sample(reviews, 1)
+        movie = Movie.objects.get(review=ran[0].id)
+        print(movie)
+        return movie.poster_path
 
 class UserReviewListSerializer(serializers.ModelSerializer):
     review_set = serializers.SerializerMethodField()
@@ -92,3 +84,8 @@ class UserWishListSerializer(serializers.ModelSerializer):
             data.append(wish_dict)
         return data
 
+class MyinfoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ('username',)
