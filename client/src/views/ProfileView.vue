@@ -5,10 +5,7 @@
 
     <div class="flex justify-between mx-auto mb-10 border-b-2	">
       <div class="text-3xl font-bold">{{username}} 님이 리뷰를 남긴 작품들🎥</div>
-      <div class="flex items-center">
-      <span>더보기</span>
-      <span class="material-symbols-outlined">arrow_forward_ios</span>
-      </div>
+
     </div>
     <div v-if="reviews">
       <UserReviewDetail

@@ -2,7 +2,9 @@
   <div v-if="review">
     <div class="grid grid-cols-3">
       <div class="poster-box mx-auto text-xl w-80">
-        <img :src="poster_path" alt="포스터" class="w-80">
+        <router-link  :to="{name:'movie_detail', params:{movieId:review.movie.pk}}" >
+          <img :src="poster_path" alt="포스터" class="w-80">
+        </router-link>
         <div class="">
           <p class="truncate ...">
             {{review.movie.title}}
@@ -84,7 +86,7 @@ computed: {
   },
   scoreEmoji(){
     const tmp = this.review.acting + this.review.art + this.review.directing + this.review.music + this.review.story
-    return tmp > 10 ? '👨‍👩‍👦' : (tmp > 5 ?  '💑' : '🤮')  
+    return tmp > 7 ? '👨‍👩‍👦' : (tmp > 4 ?  '💑' : '🤮')  
   }
 
 },

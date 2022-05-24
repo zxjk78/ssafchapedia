@@ -51,7 +51,7 @@ const routes = [
 
   },
   {
-    path: '/:movieId/review/new/detail', //=> http://localhost:8080/:movieId/review/new
+    path: '/:movieId/review/new/detail', //=> http://localhost:8080/:movieId/review/new/detail
     name: 'review_new_detail',
     component: ReviewDetailView,
 

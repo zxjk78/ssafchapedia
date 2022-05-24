@@ -5,7 +5,7 @@
 
 
     <div class="mx-auto p-2" style="width:600px;">
-      <h1 class="text-2xl text-center font-bold mb-3">점수가 반영되었습니다. <br> 덧붙여 영화의 소감을 남기실 수 있습니다.</h1>
+      <h1 class="text-2xl text-center font-bold mb-3">회원님의 점수가 등록되었습니다. <br> 덧붙여 영화의 소감을 남기실 수 있습니다.</h1>
 
       <form class="bg-yellow-400 rounded-md" @submit.prevent="onSubmit">
         <label for="title" class="mx-4 font-bold text-xl">제목</label>        
@@ -13,11 +13,11 @@
         <br>
         <label for="content" class="m-5 font-bold text-xl">감상</label>
         <br>
-        <textarea name="content"  id="content"  class="bg-yellow-300 rounded-xl p-2 my-2 ml-10" cols="60" rows="10" required></textarea>
+        <textarea name="content"  id="content"  class="bg-yellow-300 rounded-xl p-2 my-2 ml-10" cols="60" rows="10" maxlength="400" required></textarea>
 
         <div class="py-2 flex justify-around">
-          <button class="rounded-lg bg-yellow-200 my-5 p-3 px-10 font-bold">감상 제출</button>
-          <button class="rounded-lg bg-yellow-200 my-5 p-3 px-10 font-bold"><router-link to="home">그만 두기</router-link></button>
+          <button class="rounded-lg bg-yellow-200 my-5 p-3 px-10 font-bold">감상평 제출하기</button>
+          <button class="rounded-lg bg-yellow-200 my-5 p-3 px-10 font-bold"><router-link :to="{name:'home'}">그만 두기</router-link></button>
         </div>
       </form>
     </div>
@@ -51,7 +51,8 @@ methods: {
     try {
       const res = updateReview(this.movieId, data)
       console.log(res) // 제대로 반환되서 promise 객체 반환함
-      this.$router.push({name:'home'})
+      // {name:'movie_detail', params:{movieId:}}
+      this.$router.push({name:'movie_detail', params:{movieId:this.movieId}})
     } catch (error) {
       console.error(error)
     }
