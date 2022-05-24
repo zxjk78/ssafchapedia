@@ -7,6 +7,7 @@ const SIGNUP_URL = '/auth/signup/'
 // accounts
 const ACCOUNT_URL = '/accounts/' 
 const PROFILE_URL = '/profile/'
+const MYINFO_URL = '/accounts/myinfo/'
 // const PROFILE_URL = '/accounts/<str:username>/profile'
 
 //DEFAULT_URL은 중간에 pk 등이 들어갈 때도 사용 가능
@@ -21,7 +22,7 @@ const MOVIE_URL = '/movies/movie'
 const ACTOR_DEFAULT_URL = '/people/'
 const ACTOR_SEARCH_LIST_URL = '/people/search'
 const ACTOR_DETAIL_URL = '/detail/'
-// const ACTOR_LIST_URL = '/actors/'
+// const ACTOR_URL = '/actors/'
 // const ACTOR_DETAIL_URL = '/actors/<int:actor_pk>/detail/'
 // const ACTOR_SEARCH_LIST_URL = '/actors/search'
 
@@ -29,6 +30,7 @@ const ACTOR_DETAIL_URL = '/detail/'
 const REVIEW_URL = '/reviews/'
 const REVIEW_LIST_URL = '/reviews/'
 // const REVIEW_LIST_URL = '/reviews/'
+// const USER_REVIEW_LIST_URL = '/reviews/<str:username>/list/'
 // const REVIEW_CREATE_URL = '/reviews/new/'
 
 
@@ -54,6 +56,7 @@ axiosInstance.interceptors.request.use(
 
 const login = async (body) => {
   const res = await axiosInstance.post(LOGIN_URL, body)
+  console.log(res)
   return res
 }
 
@@ -63,6 +66,11 @@ const signup = async (body) => {
 }
 
 //account
+
+const getMyInfo = async ()=> {
+  const res = await axiosInstance.get(MYINFO_URL)
+  return res
+}
 
 const fetchUserProfile = async (username)=> {
   const res = await axiosInstance.get(ACCOUNT_URL + username + PROFILE_URL)
@@ -104,6 +112,11 @@ const fetchReviewList = async () => {
   return res
 }
 
+const fetchUserReviewList = async (username) => {
+  const res = await axiosInstance.get(REVIEW_LIST_URL + username + '/list/')
+  return res
+}
+
 const createReview = async (movieId, body) => {
   const res = await axiosInstance.post(REVIEW_URL + movieId + `/new/`, body)
   return res
@@ -122,6 +135,7 @@ export {
   login,
   signup,
   //account
+  getMyInfo,
   fetchUserProfile,
   //movie
   fetchMovie,
@@ -131,6 +145,7 @@ export {
   fetchActorDetail,
   //review
   fetchReviewList,
+  fetchUserReviewList,
   createReview,
   updateReview,
 }

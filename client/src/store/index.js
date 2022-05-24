@@ -7,19 +7,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    //TMDB 이미지 URL 여기에 profile_path나 poster_path 붙여넣어서 사용
+    tmdbImgUrl:'https://image.tmdb.org/t/p/original/',
+    // token 기반 인증에 사용
     authToken: localStorage.getItem('authToken') || '',
-
+    username: '',
     // 키워드 검색에 사용되는 변수
-
     searchKeyword : '',
+
     //영화 리스트 받아오기
     movies:[],
     movieTitles:[],
     reviews:[],
+
     // 로그인, 회원가입폼 modal에 사용되는 변수
     loginModal: false,
     signupModal: false,
-
+    
 
   },
   // getters에서 state에 있는 변수들을 조회하고, component들의 computed에서는 getters의 함수만을 조회해서 사용하는 방식으로
@@ -42,7 +46,8 @@ export default new Vuex.Store({
     //영화, 배우 검색 키워드
     search_keyword(state){
       return state.searchKeyword
-    }
+    },
+
   },
   mutations: {
     TOGGLE_LOGIN_MODAL(state){      
@@ -55,6 +60,9 @@ export default new Vuex.Store({
       state.authToken = token
       //localStorage는 String밖에 저장하지 못하므로, 만약 객체 등을 저장하려면 JSON으로 문자열로 변환해서 저장 필요
       localStorage.setItem('authToken', token)
+    },
+    SET_USERNAME(state, username){
+      state.username = username
     },
     SET_SEARCH_KEYWORD(state, keyword){
       state.searchKeyword = keyword
