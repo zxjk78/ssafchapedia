@@ -32,7 +32,7 @@
     </VueSlickCarousel>
 
     <!-- 테스트용 -->
-    {{movielist}}
+    
     </div>
     
   </div>

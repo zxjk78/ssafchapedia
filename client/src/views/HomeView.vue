@@ -32,10 +32,21 @@ export default {
   data(){
     return{
       movies:[],
+      genres:[]
     }
   },
   methods:{
     getMovies:function(){
+      const SERVER_IP = 'http://localhost:8080/'
+      axios.get(`${SERVER_IP}/api/v1/movies/`)
+      .then(response=>{
+        this.movies = response.data
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    },
+    getGenres:function(){
       const SERVER_IP = 'http://localhost:8080/'
       axios.get(`${SERVER_IP}/api/v1/movies/`)
       .then(response=>{
