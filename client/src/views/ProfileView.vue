@@ -34,7 +34,8 @@ export default {
   name:'ProfileView',
   data(){return {
     username:this.$route.params.username,
-    reviews: null
+    reviews: null,
+    page: 1,
   }},
   components:{
     UserReviewDetail,
@@ -42,10 +43,28 @@ export default {
   computed:{
 
   },
+  methods:{
+    async onScroll(){
+      // scrollTop: 스크롤바의 위에서부터의 수직 위치, clientHeight: 화면에 표시되는 해당 요소의 높이, scrollHeight 요소의 전체 높이
+     const {scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      // console.log(scrollTop)
+      if (scrollTop + clientHeight >= scrollHeight - 10) {
+        const res = await fetchUserReviewList(this.username, this.page++)
+        // console.log(res.data.results)
+        this.reviews = this.reviews.concat( res.data.results)
+        
+      }
+
+    }
+  },
   async created(){
     
-  const res = await fetchUserReviewList(this.username)
+  const res = await fetchUserReviewList(this.username, this.page++)
   this.reviews = res.data.results
+  },
+  mounted(){
+    //mounted에 
+    window.addEventListener('scroll', this.onScroll)
   }
 }
 </script>

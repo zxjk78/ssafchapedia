@@ -112,8 +112,8 @@ const fetchReviewList = async () => {
   return res
 }
 
-const fetchUserReviewList = async (username) => {
-  const res = await axiosInstance.get(REVIEW_LIST_URL + username + '/list/')
+const fetchUserReviewList = async (username, page) => {
+  const res = await axiosInstance.get(REVIEW_LIST_URL + username + '/list/', {params:{page: page}})
   return res
 }
 
