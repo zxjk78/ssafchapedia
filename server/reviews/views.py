@@ -1,7 +1,5 @@
-import imp
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import get_user_model
-from uritemplate import partial
 from .serializers.review import ReviewListSerializer, ReviewSerializer
 from .models import Review
 from movies.models import Movie

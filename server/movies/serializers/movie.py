@@ -65,4 +65,13 @@ class MovieSearchSerializer(serializers.ModelSerializer):
             'release_date',
             'poster_path',
         )
-    
+
+class MovieRecommendSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = (
+            'title',
+            'vote_average',
+            'release_date',
+            'poster_path',
+        )
