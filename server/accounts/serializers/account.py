@@ -37,7 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     #     return data
 
 
-class UserReviewSerializer(serializers.ModelSerializer):
+class UserReviewListSerializer(serializers.ModelSerializer):
     review_set = serializers.SerializerMethodField()
 
     class Meta:
@@ -55,7 +55,7 @@ class UserReviewSerializer(serializers.ModelSerializer):
             data.append(review_dict)
         return data
 
-class UserWatchSerializer(serializers.ModelSerializer):
+class UserWatchListSerializer(serializers.ModelSerializer):
     watch = serializers.SerializerMethodField()
 
     class Meta:
@@ -73,7 +73,7 @@ class UserWatchSerializer(serializers.ModelSerializer):
             data.append(watch_dict)
         return data
 
-class UserWishSerializer(serializers.ModelSerializer):
+class UserWishListSerializer(serializers.ModelSerializer):
 
     wish = serializers.SerializerMethodField()
 

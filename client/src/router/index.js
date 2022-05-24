@@ -33,8 +33,7 @@ const routes = [
     component: LoginView,
   },
   {
-    // path: '/:username', //=> http://localhost:8080/:username
-    path: '/profile', //=> http://localhost:8080/profile : 임시로 쓰는 url
+    path: '/:username/profile', //=> http://localhost:8080/:username/profile
     name: 'profile',
     component: ProfileView,
   },

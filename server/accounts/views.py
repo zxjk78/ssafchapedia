@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from yaml import serialize
-from .serializers.account import ProfileSerializer, UserReviewSerializer, UserWatchSerializer, UserWishSerializer
+from .serializers.account import ProfileSerializer, UserReviewListSerializer, UserWatchListSerializer, UserWishListSerializer
 from movies.models import Movie
 
 # DRF
@@ -23,23 +23,20 @@ def profile(request, username):
 @api_view(['GET'])
 def user_wish(request, username):
 
-    user = get_user_model().objects.get(username=username)
-    
-    serializer = UserWishSerializer(user)
+    user = get_user_model().objects.get(username=username)    
+    serializer = UserWishListSerializer(user)
     return Response(serializer.data)
 
 @swagger_auto_schema(methods=['GET',])
 @api_view(['GET'])
 def user_watch(request, username):
-
-    user = get_user_model().objects.get(username=username)
-    
-    serializer = UserWatchSerializer(user)
+    user = get_user_model().objects.get(username=username)    
+    serializer = UserWatchListSerializer(user)
     return Response(serializer.data)
 
 @swagger_auto_schema(methods=['GET',])
 @api_view(['GET'])
 def user_review(request, username):
     user = get_user_model().objects.get(username=username)    
-    serializer = UserReviewSerializer(user)
+    serializer = UserReviewListSerializer(user)
     return Response(serializer.data)

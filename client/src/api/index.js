@@ -1,21 +1,37 @@
 import axios from 'axios'
 
+// auth: dj-rest-auth 의 토큰 기반 인증 기능 이용
 const LOGIN_URL = '/auth/login/'
 const SIGNUP_URL = '/auth/signup/'
-const ARTICLE_LIST_URL = '/articles/'
 
+// accounts
+const ACCOUNT_URL = '/accounts/' 
+const PROFILE_URL = '/profile/'
+// const PROFILE_URL = '/accounts/<str:username>/profile'
+
+//DEFAULT_URL은 중간에 pk 등이 들어갈 때도 사용 가능
 // movie
 const MOVIE_SEARCH_LIST_URL = '/movies/search'
 const MOVIE_URL = '/movies/movie'
+// const MOVIE_LIST_URL = '/movies/'
+// const MOVIE_DETAIL_URL = '/movies/<int:movie_pk>/detail/'
+// const MOVIE_SEARCH_LIST_URL = '/movies/search'
+
 // actor
 const ACTOR_DEFAULT_URL = '/people/'
 const ACTOR_SEARCH_LIST_URL = '/people/search'
 const ACTOR_DETAIL_URL = '/detail/'
+// const ACTOR_LIST_URL = '/actors/'
+// const ACTOR_DETAIL_URL = '/actors/<int:actor_pk>/detail/'
+// const ACTOR_SEARCH_LIST_URL = '/actors/search'
 
 // review
 const REVIEW_URL = '/reviews/'
 const REVIEW_LIST_URL = '/reviews/'
+// const REVIEW_LIST_URL = '/reviews/'
 // const REVIEW_CREATE_URL = '/reviews/new/'
+
+
 const axiosInstance = axios.create({
   baseURL:'http://localhost:8000/api/v1',
 })
@@ -34,7 +50,7 @@ axiosInstance.interceptors.request.use(
 )
 
 
-//account
+//auth: django restframework
 
 const login = async (body) => {
   const res = await axiosInstance.post(LOGIN_URL, body)
@@ -46,12 +62,16 @@ const signup = async (body) => {
   return res 
 }
 
-//movie
+//account
 
-const fetchArticleList = async () => {
-  const res = await axiosInstance.get(ARTICLE_LIST_URL)
+const fetchUserProfile = async (username)=> {
+  const res = await axiosInstance.get(ACCOUNT_URL + username + PROFILE_URL)
   return res
 }
+
+
+//movie
+
 const fetchMovieSearchList = async (keyword) => {
   const res = await axiosInstance.get(MOVIE_SEARCH_LIST_URL, {params:{keyword: keyword}})
   return res
@@ -98,13 +118,14 @@ const updateReview = async (movieId, body) => {
 
 
 export {
-  //account
+  //auth
   login,
   signup,
+  //account
+  fetchUserProfile,
   //movie
   fetchMovie,
   fetchMovieSearchList,
-  fetchArticleList,
   //people
   fetchActorSearchList,
   fetchActorDetail,
