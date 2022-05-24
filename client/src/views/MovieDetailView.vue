@@ -8,12 +8,26 @@
       </div>
     </div>
 
-    <h1 class="text-2xl font-bold">대표</h1>
+    <h1 class="text-2xl font-bold">
+      대표
       <MovieDetail
+        :v-for="movie in MovieInfo"
+        />
+    </h1>
+    <!-- <MovieCardList/> -->
+      <!-- <MovieDetail
       v-if="MovieInfo.pk"
-      :movies="MovieInfo.pk"
+      :movie="MovieInfo.pk"
+      :key = 'idx'
       :arrType="1"
-      />
+      /> -->
+      
+      <!-- <MovieCard
+      v-for="(movie,idx) in movieCnt"
+      :key="idx"
+      :movie='movie'
+      :idx='idx'
+      /> -->
     <!-- <h1>
       {{movieId}}
     </h1> -->
@@ -29,6 +43,7 @@
 <script>
 import {fetchMovie} from '@/api/index.js'
 import MovieDetail from '@/components/detail/MovieDetail.vue'
+// import MovieCardList from '@/components/home/MovieCardList'
 export default {
   name: 'MovieDetailView',
   data(){
@@ -40,6 +55,7 @@ export default {
   },
   components: {
     MovieDetail,
+    
   },
   async created(){
     const movie = await fetchMovie(this.MovieId)
