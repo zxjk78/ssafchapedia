@@ -18,16 +18,23 @@
     </div>
     <div class="mx-6">
 
-    <VueSlickCarousel v-bind="settings" class="mx-6">
+    <VueSlickCarousel v-if="MovieInfo" v-bind="settings" class="mx-6">
       <MovieCard
-      v-for="(movie,id) in movies"
-      :key="id"
-      :movie="movie"
+      v-for="(movie,idx) in movieCnt"
+      :key="idx"
+      :movie='movie'
+      :idx='idx'
       />
-
+      <MovieDetail
+      v-if="MovieInfo.pk"
+      :movies="MovieInfo.pk"
+      :arrType="1"
+      />
 
     </VueSlickCarousel>
 
+    <!-- 테스트용 -->
+    <!-- 안녕안녕: {{getMovie()}}  -->
     </div>
   </div>
 </template>
@@ -38,7 +45,7 @@
   import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 
   import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-
+  import {fetchMovie} from '@/api/index.js'
   import {mapGetters} from 'vuex'
   export default {
     name: 'MyComponent',
@@ -54,6 +61,9 @@
             slidesToScroll: 5,
             
           },
+        MovieId:this.$route.params.movieId,
+        MovieInfo: '',
+        movieCnt: ''
       }
     },
     components: { 
@@ -75,17 +85,35 @@
           const config = {
           Authorization: `JWT ${token}`
         }
-      return config
-    },
-    },  
+          return config
+        },
+        //
+        // getMovie(){
+        //   this.$axios.get('http://localhost:8080/api/v1/movies')
+        //   .then(response=>{
+        //     console.log('### response: ' + JSON.stringify(response))
+        //   this.boardList = response.data
+        //   })
+        //   .catch(error => {
+        //     console.log(error)
+        //   })
+        //   },
+        },
     computed:{
       ...mapGetters({
         movies:'movies'
     })
     },
-    created(){
-      this.$store.dispatch('getMovies',this.setToken())
-    },
+    // created(){
+    //   this.$store.dispatch('getMovies',this.setToken())
+    //   // this.$store.dispatch('getMovies')
+    //   // this.getMovie()
+    // },
+    async created(){
+    const movie = await fetchMovie(this.MovieId)
+    this.MovieInfo = movie.data
+    this.movieCnt= movie.data.title.length
+  }
   }
 </script>
 

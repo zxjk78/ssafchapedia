@@ -14,6 +14,7 @@ export default new Vuex.Store({
     searchKeyword : '',
     //영화 리스트 받아오기
     movies:[],
+    movieList:[],
     movieTitles:[],
     reviews:[],
     // 로그인, 회원가입폼 modal에 사용되는 변수
@@ -29,8 +30,9 @@ export default new Vuex.Store({
     },
 
     //영화 리스트
-    movies(state){
-      return state.movies},
+    movie:function(){
+      return this.state.movies.map(a=>a.movieList)
+    },
 
     movieTitles(state){
       return state.movieTitles
@@ -70,6 +72,17 @@ export default new Vuex.Store({
     //영화리스트
     GET_MOVIES(state, res) {
       state.movies = res
+      //영화 추천 알고리즘에 적용할 필터
+      // for (let index = 0; index < data.length; index++){
+      //   if (data[index].popularity !=null){
+      //     if (data[index].popularity.slice(-2, )=='만명' && data[index].popularity.slice(0,-2) > 10){
+      //       state.recommend.push(data[index])
+      //     }
+      //     else if (data[index].reviews){
+      //       state.recommend.push(data[index])
+      //     }
+      //   }
+      // }
     },
     GET_MOVIE_TITLES(state, res) {
       const tmp = []
@@ -89,11 +102,10 @@ export default new Vuex.Store({
   },
   actions: {
 
-    getMovies({commit}, token) {
-      axios({
+    getMovies({commit}) {
+      axios.get({
         method: 'GET',
         url: `${SERVER}api/v1/movies/`,
-        headers: token,
       })
       .then(res => {
         commit('GET_MOVIES', res.data)
