@@ -59,10 +59,20 @@ export default {
     }
   },
   async created(){
-    
-  const res = await fetchUserReviewList(this.username, this.page++)
-  this.reviews = res.data.results
-  this.maxPage = Math.ceil(res.data.count / this.reviews.length)
+    try {
+      const res = await fetchUserReviewList(this.username, this.page++)
+      this.reviews = res.data.results
+      this.maxPage = Math.ceil(res.data.count / this.reviews.length)
+      
+    } catch (error) {
+      console.error(error.response.data)
+      console.error(error.response.status)
+
+      if (error.response.status == 404){
+        this.$router.push({name: 'not_found', params:{errorMsg: '해당 회원은 존재하지 않는 회원입니다.'}})
+      }
+
+    }
   },
   mounted(){
     //mounted에 

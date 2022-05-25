@@ -5,7 +5,7 @@
         <router-link :to="{name: 'actor_detail', params:{actorId:actor.pk}}"><img :src="actor_renew.profile_path" class="w-32" alt=""></router-link>
       </div>
       <div class="w-1/3 flex flex-col justify-start gap-y-4">
-        <div class="font-bold text-2xl">{{actor_renew.korean_name}}</div>
+        <div class="font-bold text-2xl mt-2">{{actor_renew.korean_name}}</div>
         <div class="font-bold text-slate-500">작품 {{actor_renew.movies.length}}개</div>
         </div>
     </div>   

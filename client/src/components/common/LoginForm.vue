@@ -28,7 +28,7 @@
                         가입하지 않으셨나요? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">가입하기</a>
                     </div>
 
-                    <SocialLogin/>
+                    <!-- <SocialLogin/> -->
 
                 </form>
             </div>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import SocialLogin from '@/components/common/SocialLogin.vue'
+// import SocialLogin from '@/components/common/SocialLogin.vue'
 import {login} from '@/api/index.js'
 import {getMyInfo} from '@/api/index.js'
 
@@ -90,7 +90,7 @@ methods: {
       this.$router.go()
     } catch (error) {
       // 3. 실패하면 에러
-      console.error(error)
+      alert('아이디 또는 비밀번호가 일치하지 않습니다.')
     }
 
   }
@@ -102,7 +102,7 @@ computed: {
   }
 },
 components: {
-  SocialLogin
+  // SocialLogin
 },
 
 

@@ -21,7 +21,8 @@ class UserReviewDetailView(ListAPIView):
     lookup_url_kwarg = 'username'
     def get_queryset(self):
         username = self.kwargs.get(self.lookup_url_kwarg)
-        user = get_user_model().objects.get(username=username)
+        user = get_object_or_404(get_user_model(), username=username)
+        # user = get_user_model().objects.get(username=username)
         reviews = Review.objects.filter(user=user).order_by('-pk')
         return reviews
 
@@ -63,14 +64,14 @@ def review_user_list(request, username):
     serializer = ReviewDetailSerializer(review)
     return Response(serializer.data)
 
-class UserReviewDetailView(ListAPIView):
-    serializer_class = ReviewDetailSerializer
-    lookup_url_kwarg = 'username'
-    def get_queryset(self):
-        username = self.kwargs.get(self.lookup_url_kwarg)
-        user = get_user_model().objects.get(username=username)
-        reviews = Review.objects.filter(user=user).order_by('-pk')
-        return reviews
+# class UserReviewDetailView(ListAPIView):
+#     serializer_class = ReviewDetailSerializer
+#     lookup_url_kwarg = 'username'
+#     def get_queryset(self):
+#         username = self.kwargs.get(self.lookup_url_kwarg)
+#         user = get_user_model().objects.get(username=username)
+#         reviews = Review.objects.filter(user=user).order_by('-pk')
+#         return reviews
 
 # @swagger_auto_schema(methods=['GET'])
 # @api_view(['GET'])
