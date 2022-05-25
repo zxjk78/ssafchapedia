@@ -11,7 +11,7 @@
         </a>
         <div class="flex items-center relative">
         <svg class="w-5 h-5 absolute left-20 ml-5 text-slate-400 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-        <input type="text" class="text-center w-96 h-10 bg-slate-100 rounded-lg	ml-20	" placeholder="감독명, 작품, 배우를 검색해보세요." @input="onSearchDebounce">
+        <input type="text" id="keywordInput" class="text-center w-96 h-10 bg-slate-100 rounded-lg	ml-20	" placeholder="감독명, 작품, 배우를 검색해보세요." @input="onSearchDebounce">
 
         </div>
 
@@ -21,7 +21,7 @@
         account_circle
         </span>
         
-        <router-link :to="{name:'profile', params:{username:userName}}" class="bg-yello-400">마이페이지</router-link>
+        <router-link :to="{name:'profile', params:{username:userName}}" class="bg-yello-400">{{userName}}님</router-link>
         <!-- <button class="bg-yello-400">마이페이지</button> -->
         <button class="border-2 border-yellow-400	" @click="logout">로그아웃</button>
       </div>
@@ -73,8 +73,8 @@ methods: {
       //v-model 한글 연동문제 있어서 event.target.value로 변경
       // this.$store.dispatch('keywordSearch', event.target.value)
 
-      const keyword = event.target.value
-      if (!keyword) return // 비었을 때는 작동 X
+      const keyword = event.target.value.trim()
+      if (!keyword) return // 공백만, 비었을 때는 작동 X
       this.$store.commit('SET_SEARCH_KEYWORD', keyword)
 
       if (document.location.pathname != '/search') {
@@ -90,10 +90,6 @@ methods: {
     this.$store.commit('LOGOUT')
   },
 
-
-
-
-
 },
 computed: {
   isLoggedIn(){
@@ -103,6 +99,12 @@ computed: {
   getUserName(){
     return this.$store.getters.getUserName
   },
+},
+mounted(){
+  window.addEventListener('click', ()=>{ 
+      const keywordInput = document.querySelector('#keywordInput')
+      keywordInput.value = ''
+  })
 },
 components: {
   LoginForm,

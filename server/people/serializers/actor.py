@@ -19,6 +19,7 @@ class ActorSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Actor
         fields = (
+            'pk', 
             'actor_id', 
             'name', 
             'korean_name',
@@ -33,7 +34,8 @@ class ActorDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Actor
         fields = (
-            'id', 
+            'pk',
+            'id',
             'name', 
             'korean_name',
             'profile_path',
@@ -47,6 +49,7 @@ class ActorDetailSerializer(serializers.ModelSerializer):
         tmp = None
         for movie in movies:
             tmp = dict()
+            tmp['pk'] = movie.pk
             tmp['id'] = movie.id
             tmp['poster_path'] = movie.poster_path
             tmp['title'] = movie.title
@@ -63,6 +66,7 @@ class ActorDetailSerializer(serializers.ModelSerializer):
             if movie.vote_average < 7:
                 continue
             tmp = dict()
+            tmp['pk'] = movie.pk
             tmp['id'] = movie.id
             tmp['poster_path'] = movie.poster_path
             tmp['title'] = movie.title
@@ -71,6 +75,6 @@ class ActorDetailSerializer(serializers.ModelSerializer):
 
 
             result.append(tmp)
-        return result
+        return result[:3]
 
 
