@@ -19,12 +19,19 @@
         </div>
       </div>
       <div class="score-box flex flex-col justify-center items-center">
-        <ScoreChart
+        <!-- <ScoreChart
+        v-if="movieInfo.scores"
+        :sscores="movieInfo.scores"
+        :chartId="idx"
+        class="w-96"
+        /> -->
+        <ScoreChart2
         v-if="movieInfo.scores"
         :sscores="movieInfo.scores"
         :chartId="idx"
         class="w-96"
         />
+
         <div class="mt-5 text-bold text-xl">
         {{username}}님의 다각도 평가점수
         </div>
@@ -47,7 +54,8 @@
 </template>
 
 <script>
-import ScoreChart from '@/components/common/ScoreChart.vue'
+// import ScoreChart from '@/components/common/ScoreChart.vue'
+import ScoreChart2 from '@/components/common/ScoreChart2.vue'
 export default {
 name: 'UserReviewDetail',
 data(){
@@ -68,7 +76,8 @@ props:{
 
 },
 components: {
-  ScoreChart,
+  // ScoreChart,
+  ScoreChart2,
 },
 computed: {
 

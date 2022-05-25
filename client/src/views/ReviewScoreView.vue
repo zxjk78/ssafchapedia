@@ -257,6 +257,8 @@ methods: {
       data.append('acting', chk[2])
       data.append('story', chk[3])
       data.append('art', chk[4])
+      data.append('title', chk[5])
+      data.append('content', chk[6])
     try {
       createReview(this.movieId, data)
       
@@ -302,11 +304,14 @@ methods: {
     const inputValueList = [form.directing.value, form.music.value, form.story.value, form.acting.value, form.art.value]
     for (const i of inputValueList) {
       if (!i) {
-        alert('영화 점수는 모두 골라 주세요')
+        alert('영화 점수는 모두 선택해 주세요')
         return false
       }
     }
-    return inputValueList
+    // 추가로 유효성 검사 필요없는거 집어넣고 전송
+    const result = inputValueList.concat([form.title.value, form.content.value])
+    
+    return result
 },
 
 },
