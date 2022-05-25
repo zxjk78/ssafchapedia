@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex">
-      <img :src="'https://image.tmdb.org/t/p/w200/'+ MovieInfo.poster_path" class="w-20" alt="">
+      <img :src="'https://image.tmdb.org/t/p/w200/'+ MovieInfo.poster_path" class="w-50" alt="">
       <div>
         <div><h1 class="text-3xl font-bold">{{MovieInfo.title}}</h1></div>
         <!-- <div>작품 개수: {{movieCnt}}개</div> -->
