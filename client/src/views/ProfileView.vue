@@ -33,6 +33,7 @@ export default {
     username:this.$route.params.username,
     reviews: null,
     page: 1,
+    maxPage: '',
   }},
   components:{
     UserReviewDetail,
@@ -46,6 +47,9 @@ export default {
      const {scrollTop, clientHeight, scrollHeight } = document.documentElement;
       // console.log(scrollTop)
       if (scrollTop + clientHeight >= scrollHeight - 10) {
+        if (this.page > this.maxPage) {
+          return
+          }
         const res = await fetchUserReviewList(this.username, this.page++)
         // console.log(res.data.results)
         this.reviews = this.reviews.concat( res.data.results)
@@ -58,6 +62,7 @@ export default {
     
   const res = await fetchUserReviewList(this.username, this.page++)
   this.reviews = res.data.results
+  this.maxPage = Math.ceil(res.data.count / this.reviews.length)
   },
   mounted(){
     //mounted에 
