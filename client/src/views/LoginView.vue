@@ -26,6 +26,7 @@ export default {
   },
   methods:{
     async onSubmit(){
+      
       //1.API 서버로 로그인 요청
       const res = await login(this.loginInfo)
 

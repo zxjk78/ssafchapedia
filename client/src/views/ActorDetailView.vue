@@ -46,7 +46,11 @@ export default {
       this.movieCnt= actor.data.movies.length
       
     } catch (error) {
-      console.error(error)
+      // console.error(error.response.data)
+
+      if (error.response.status == 404){
+        this.$router.push({name: 'not_found', params:{errorMsg: '찾으시는 배우는 존재하지 않습니다.'}})
+      }
     }
   }
 }

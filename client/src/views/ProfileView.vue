@@ -65,8 +65,7 @@ export default {
       this.maxPage = Math.ceil(res.data.count / this.reviews.length)
       
     } catch (error) {
-      console.error(error.response.data)
-      console.error(error.response.status)
+      // console.error(error.response.data)
 
       if (error.response.status == 404){
         this.$router.push({name: 'not_found', params:{errorMsg: '해당 회원은 존재하지 않는 회원입니다.'}})
