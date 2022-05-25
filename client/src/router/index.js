@@ -10,6 +10,7 @@ import ReviewScoreView from '@/views/ReviewScoreView'
 import ReviewDetailView from '@/views/ReviewDetailView'
 import ActorDetailView from '@/views/ActorDetailView'
 import MovieDetailView from '@/views/MovieDetailView'
+import NotFoundView from '@/views/NotFoundView'
 // import NaverLoginAccessView from '@/views/NaverLoginAccessView'
 // import GoogleLoginAccessView from '@/views/GoogleLoginAccessView'
 
@@ -72,7 +73,19 @@ const routes = [
 
   },
 
+// 404 not found
+{
+  path: '/404', //=> 만들어놓은 404 vue
+  name: 'not_found',
+  
+  component: NotFoundView,
 
+},
+{
+  path: '*', //=> 어떤 경로와도 매칭이 되지 않은 경우 404 vue로 리다이트랙트해서 보여줌
+  redirect: '/404',
+  
+},
 
 
 ]

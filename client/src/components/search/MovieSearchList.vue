@@ -9,11 +9,11 @@
     v-for="movie in movieList"
     :key="movie.pk"
     :movie="movie"
+    class="hover:bg-yellow-200 hover:-translate-y-0.5 hover:scale-105 duration-300"
+
     />
     </div>
-    <div v-else class="my-5 text-3xl font-bold">
-      검색 조건에 맞는 영화가 없습니다. 
-    </div>
+
 
   </div>
   
@@ -42,10 +42,12 @@ props:{
   async created() {
     try {
     const keyword = this.keyword
+    if (!keyword.trim()) return
     const movieSearchList = await fetchMovieSearchList(keyword)
     
+    // console.log(this.movieList)
     this.movieList = movieSearchList.data
-    console.log(this.movieList)
+    this.$store.commit('SET_SEARCH_MOVIE_CNT', this.movieList.length)
 
   } catch (error) {
     console.error(error)

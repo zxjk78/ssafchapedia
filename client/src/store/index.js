@@ -14,7 +14,8 @@ export default new Vuex.Store({
     username: '',
     // 키워드 검색에 사용되는 변수
     searchKeyword : '',
-
+    searchMovieCnt: 0,
+    searchActorCnt: 0,
     //영화 리스트 받아오기
     movies:[],
     movieList:[],
@@ -49,6 +50,14 @@ export default new Vuex.Store({
     search_keyword(state){
       return state.searchKeyword
     },
+    //영화, 배우 검색후 결과 키워드
+    search_result_exist(state){
+      if (state.searchMovieCnt || state.searchActorCnt ){
+        return true 
+      } else {
+        return false
+      }
+    },
 
   },
   mutations: {
@@ -70,6 +79,12 @@ export default new Vuex.Store({
     },
     SET_SEARCH_KEYWORD(state, keyword){
       state.searchKeyword = keyword
+    },
+    SET_SEARCH_MOVIE_CNT(state, cnt){
+      state.searchMovieCnt = cnt
+    },
+    SET_SEARCH_ACTOR_CNT(state, cnt){
+      state.searchActorCnt = cnt
     },
     LOGOUT(state){
       // 1. DB에서 해당 authToken 삭제

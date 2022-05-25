@@ -40,9 +40,14 @@ export default {
     ActorMovieDetail,
   },
   async created(){
-    const actor = await fetchActorDetail(this.actorId)
-    this.actorInfo = actor.data
-    this.movieCnt= actor.data.movies.length
+    try {
+      const actor = await fetchActorDetail(this.actorId)
+      this.actorInfo = actor.data
+      this.movieCnt= actor.data.movies.length
+      
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 </script>
