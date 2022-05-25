@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     # path('', views.movie_list),
 
-    path('',views.ListMovieView.as_view()),
+    path('movie/',views.ListMovieView.as_view()),
 
     path('movie/<int:movie_pk>/',views.movie_detail),
     path('random/',views.movie_random),
