@@ -21,7 +21,7 @@
         account_circle
         </span>
         
-        <router-link :to="{name:'profile', params:{username:userName}}" class="bg-yello-400">마이페이지</router-link>
+        <router-link :to="{name:'profile', params:{username:userName}}" class="bg-yello-400">{{userName}}님</router-link>
         <!-- <button class="bg-yello-400">마이페이지</button> -->
         <button class="border-2 border-yellow-400	" @click="logout">로그아웃</button>
       </div>

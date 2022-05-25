@@ -3,22 +3,25 @@
     <div class="grid grid-cols-3">
       <div class="poster-box mx-auto text-xl w-80">
         <router-link  :to="{name:'movie_detail', params:{movieId:review.movie.pk}}" >
-          <img :src="poster_path" alt="포스터" class="w-80">
+          <img :src="movieInfo.poster_path" alt="포스터" class="w-80">
         </router-link>
         <div class="">
           <p class="truncate ...">
             {{review.movie.title}}
           </p>
           <div class="flex justify-between">
-            <div>{{review.movie.release_date}}</div>
-          <div>⭐{{review.movie.vote_average}}</div>
+            <div>{{movieInfo.release_date}}년</div>
+          <div>
+            <div v-if="isUpcoming">🎞 개봉 예정</div>
+            <div v-else>⭐{{review.movie.vote_average}}</div>
+          </div>
           </div>
         </div>
       </div>
       <div class="score-box flex flex-col justify-center items-center">
         <ScoreChart
-        v-if="scores"
-        :sscores="scores"
+        v-if="movieInfo.scores"
+        :sscores="movieInfo.scores"
         :chartId="idx"
         class="w-96"
         />
@@ -26,7 +29,7 @@
         {{username}}님의 다각도 평가점수
         </div>
         <div class="mt-3">
-          <span class="p-2">{{scoreEmoji}}</span>{{scoreSum}} / 15
+          <span class="p-2">{{movieInfo.scoreEmoji}}</span>{{movieInfo.scoreSum}} / 15
         </div>
       </div>
       <div class="review-box flex justify-center items-center">
@@ -68,26 +71,32 @@ components: {
   ScoreChart,
 },
 computed: {
-  poster_path(){
-    return this.$store.state.tmdbImgUrl  +  this.review.movie.poster_path
-  },
-  scores(){
-    const tmp = {
-      acting: this.review.acting,
-      art: this.review.art,
-      directing: this.review.directing,
-      music: this.review.music,
-      story: this.review.story,
-    }
-    return tmp
-  },
-  scoreSum(){
-    return this.review.acting + this.review.art + this.review.directing + this.review.music + this.review.story
-  },
-  scoreEmoji(){
+
+  movieInfo(){
     const tmp = this.review.acting + this.review.art + this.review.directing + this.review.music + this.review.story
-    return tmp > 7 ? '👨‍👩‍👦' : (tmp > 4 ?  '💑' : '🤮')  
+    return {
+      poster_path: this.$store.state.tmdbImgUrl  +  this.review.movie.poster_path,
+      release_date: this.review.movie.release_date.slice(0, 4),
+      scores: {
+              acting: this.review.acting,
+              art: this.review.art,
+              directing: this.review.directing,
+              music: this.review.music,
+              story: this.review.story,
+            },
+      scoreSum: tmp,
+      scoreEmoji: tmp > 7 ? '👨‍👩‍👦' : (tmp > 4 ?  '💑' : '🤮'),
+    }
+  },
+  isUpcoming(){
+    const release = new Date(this.review.movie.release_date)
+    // console.log(release > Date.now())
+    
+    if (release > Date.now()) {return true} 
+    else {return false}
   }
+
+
 
 },
 
