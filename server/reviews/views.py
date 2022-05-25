@@ -4,7 +4,7 @@ from .serializers.review import ReviewListSerializer, ReviewSerializer, ReviewDe
 from .models import Review
 from movies.models import Movie
 from rest_framework.decorators import api_view, authentication_classes
-
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -17,12 +17,17 @@ from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 @swagger_auto_schema(methods=['GET'])
 class UserReviewDetailView(ListAPIView):
+    # 어디에 클래스를 정의하건 상관없고, 중요한건 이렇게 상속해서 원하는대로
+    # 작성한 Pagination class를 아래 pagination_class에서 상속하는 것 
+    class CustomPageNumberPagination(PageNumberPagination):
+        page_size = 5
+
     serializer_class = ReviewDetailSerializer
     lookup_url_kwarg = 'username'
+    pagination_class = CustomPageNumberPagination
     def get_queryset(self):
         username = self.kwargs.get(self.lookup_url_kwarg)
         user = get_object_or_404(get_user_model(), username=username)
-        # user = get_user_model().objects.get(username=username)
         reviews = Review.objects.filter(user=user).order_by('-pk')
         return reviews
 

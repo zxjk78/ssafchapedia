@@ -1,3 +1,4 @@
+
 <template>
   <div>
 
@@ -57,6 +58,7 @@ cursor.lineY.set("visible", false);
 // Create axes and their renderers
 // https://www.amcharts.com/docs/v5/charts/radar-chart/#Adding_axes
 var xRenderer = am5radar.AxisRendererCircular.new(root, {});
+// var xRenderer = am5radar.AxisRendererCircular.new(root, {});
 xRenderer.labels.template.setAll({
   radius: 10,
   
@@ -97,19 +99,30 @@ let series = chart.series.push(am5radar.RadarLineSeries.new(root, {
   valueYField: "litres",
   categoryXField: "score",
   tooltip:am5.Tooltip.new(root, {
-    labelText:"{valueY}"
+    labelText:"{valueY}",
+
   })
 }));
+// dot들 색깔 지정
+// series.set("fill", am5.color(0xff0000)); 
+// chart.get("colors").set("colors", [
+//   am5.color(0x095256),
+//   am5.color(0x087f8c),
+//   am5.color(0x5aaa95),
+//   am5.color(0x86a873),
+//   am5.color(0xbb9f06)
+// ]);
+
 
 series.strokes.template.setAll({
-  strokeWidth: 2
+  strokeWidth: 1
 });
 
 series.bullets.push(function () {
   return am5.Bullet.new(root, {
     sprite: am5.Circle.new(root, {
-      radius: 10,
-      fill: series.get("fill")
+      radius: 7,
+      fill: series.get("fill"),
     })
   });
 });
