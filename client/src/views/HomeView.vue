@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <MovieCardList :movies="movieInfo"/>
+    <MovieCardList/>
     <div class="popular-list row row-cols-1 row-cols-md-5 gy-3">
     <!-- <MovieDetail
         v-for="(movie, idx) in movies"
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import {fetchMovie} from '@/api/index.js'
 import MovieCardList from '@/components/home/MovieCardList.vue'
 import MovieRecommend from '@/components/home/MovieRecommend.vue'
 // import axios from 'axios'
@@ -30,33 +29,11 @@ export default {
   },
   data(){
     return{
-      movieId:this.$route.params.__all__,
-      movieInfo:'',
-      // movieCnt:'',
+      
     }
   },
   methods:{
-    // getMovies:function(){
-    //   const SERVER_IP = 'http://localhost:8080/'
-    //   axios.get(`${SERVER_IP}/api/v1/movies/`)
-    //   .then(response=>{
-    //     this.movies = response.data
-    //   })
-    //   .catch(error=>{
-    //     console.log(error)
-    //   })
-    // },
-
-    // getGenres:function(){
-    //   const SERVER_IP = 'http://localhost:8080/'
-    //   axios.get(`${SERVER_IP}/api/v1/movies/`)
-    //   .then(response=>{
-    //     this.movies = response.data
-    //   })
-    //   .catch(error=>{
-    //     console.log(error)
-    //   })
-    // }
+    
   },
   mounted(){
     // this.getMovies()
@@ -65,8 +42,7 @@ export default {
     //1.API 서버로 게시글 목록 요청
     //2.성공_> 화면에 출력
     //3.실패->예외처리
-    const movie = await fetchMovie(this.actorId)
-    this.movieInfo = movie.data
+    
     
   }
 }

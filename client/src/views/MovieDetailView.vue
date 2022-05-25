@@ -10,34 +10,19 @@
 
     <h1 class="text-2xl font-bold">
       대표
-      <MovieDetail
-        :v-for="movie in MovieInfo"
-        />
     </h1>
-    <!-- <MovieCardList/> -->
-      <!-- <MovieDetail
-      v-if="MovieInfo.pk"
-      :movie="MovieInfo.pk"
-      :key = 'idx'
+   
+    <!-- <h1 class="text-2xl font-bold">전체</h1>        -->
+    <h2 class="text-2xl font-bold">
+      <MovieDetail
+      v-if="MovieInfo"
+      :movie="MovieInfo"
       :arrType="1"
-      /> -->
-      
-      <!-- <MovieCard
-      v-for="(movie,idx) in movieCnt"
-      :key="idx"
-      :movie='movie'
-      :idx='idx'
-      /> -->
-    <!-- <h1>
-      {{movieId}}
-    </h1> -->
-    <h1 class="text-2xl font-bold">전체</h1>       
-      <!-- <MovieDetail
-      v-if="MovieInfo.overview"
-      :movies="MovieInfo.overview"
-      :arrType="2"
-      /> -->
+      />
+
+    </h2>
   </div>
+
 </template>
 
 <script>
@@ -61,7 +46,8 @@ export default {
     const movie = await fetchMovie(this.MovieId)
     this.MovieInfo = movie.data
     this.movieCnt= movie.data.title.length
-  }
+  },
+  
 }
 </script>
 

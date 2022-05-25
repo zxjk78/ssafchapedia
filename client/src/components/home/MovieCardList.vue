@@ -16,30 +16,24 @@
       </button>
 
     </div>
-    <div class="mx-6">
-
+    <div v-if="MovieInfo.length" class="mx-6">
     <VueSlickCarousel v-bind="settings" class="mx-6">
       <MovieCard
-      v-for="movie in movies"
+      v-for="movie in MovieInfo"
       :movie="movie"
-      :key="movie.id"
+      :key="movie.pk"
       />
-      <!-- <MovieDetail
-      v-if="MovieInfo.pk"
-      :movies="MovieInfo.pk"
-      :arrType="1"
-      /> -->
     </VueSlickCarousel>
 
     <!-- 테스트용 -->
-    <!-- {{movies}} -->
+    
     </div>
     
   </div>
-  
 </template>
 
 <script>
+  import {fetchMovieList} from '@/api/index.js'
   import VueSlickCarousel from 'vue-slick-carousel'
   import MovieCard from '@/components/common/MovieCard'
   import 'vue-slick-carousel/dist/vue-slick-carousel.css'
@@ -63,16 +57,16 @@
             slidesToScroll: 5,
             
           },
-        // Movie:this.$route.params,
-        // MovieInfo: '',
+        Movie:this.$route.params.movieId,
+        MovieInfo: '',
         // movieCnt: ''
       }
     },
     props:{
-      movies:{
-        type:Array,
-        required:true
-      },
+      // movies:{
+      //   type:Array,
+      //   required:true
+      // },
     },
     components: { 
       VueSlickCarousel,
@@ -108,16 +102,15 @@
         //   },
         },
     computed:{
-      // ...mapState(['MovieInfo']),
-      // movielist: function(){
-      //   return this.movies
-      // }
+      
     },
 
-    // async created(){
-    // const movielist = await fetchMovieList(this.Movie)
-    // this.MovieInfo = movielist.data
+    async created(){
+    const movieList = await fetchMovieList(this.Movie)
+    console.log(movieList)
+    this.MovieInfo = movieList.data.results
     // this.movieCnt= movielist.data.title.length
+  },
   }
 
 </script>
