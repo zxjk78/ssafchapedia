@@ -15,6 +15,8 @@ from drf_yasg.utils import swagger_auto_schema
 class ListMovieView(ListAPIView):
     queryset = Movie.objects.all().order_by('-popularity')
     serializer_class = MovieListSerializer
+
+
 # Create your views here.
 # @api_view(['GET'])
 # def movie_list(request):
