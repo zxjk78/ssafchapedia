@@ -42,6 +42,7 @@ class MovieSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = (
+            'pk',
             'title', 
             'genre_ids',
             'vote_average',

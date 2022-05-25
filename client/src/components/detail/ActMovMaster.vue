@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <router-link :to="{name:'home'}">
+    <router-link :to="{name:'movie_detail', params:{movieId:movie.pk}}">
     <img :src="'https://image.tmdb.org/t/p/w300/'+movie.poster_path" alt="" class="mx-auto">
     </router-link>
     <div>

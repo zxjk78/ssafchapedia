@@ -1,12 +1,20 @@
 <template>
   <div>   
+
+        <div v-if="actorList.length">
+
       <h1 class="my-5 text-3xl font-bold">배우 <span>{{actorList.length}}</span></h1>
 
-  <PeopleSearch
-  v-for="actor in actorList"
-  :key="actor.id"
-  :actor="actor"
-  />
+          <PeopleSearch
+          v-for="actor in actorList"
+          :key="actor.pk"
+          :actor="actor"
+          />
+      </div>
+          <div v-else class="my-5 text-3xl font-bold">
+            검색 조건에 맞는 배우가 없습니다. 
+    </div>
+
   </div>
 </template>
 
@@ -40,8 +48,8 @@ computed:{
     const keyword = this.keyword
     const actorSearchList = await fetchActorSearchList(keyword)
     
-    console.log(actorSearchList.data)
     this.actorList = actorSearchList.data
+    // console.log(this.actorList)
   } catch (error) {
     console.error(error)
   }

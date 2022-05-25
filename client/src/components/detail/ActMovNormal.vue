@@ -1,6 +1,10 @@
 <template>
   <div class="flex">
+        <router-link :to="{name:'movie_detail', params:{movieId:movie.pk}}">
+
     <img :src="'https://image.tmdb.org/t/p/w300/'+movie.poster_path" alt="" class="w-20">
+        </router-link>
+
     <div>
       <div class="font-bold">{{movie.title}}</div>
       <div class="text-gray-500 font-bold">{{release_year}}</div>

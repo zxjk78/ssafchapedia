@@ -2,7 +2,7 @@
   <div>
       <div class="flex gap-2">
       <div class="bg-red-100">
-        <div><img :src="movie_renew.poster_path" class="w-32" alt=""></div>
+        <router-link :to="{name:'movie_detail', params:{movieId:movie.pk}}"><img :src="movie_renew.poster_path" class="w-32" alt=""></router-link>
       </div>
       <div class="w-1/3 flex flex-col justify-start gap-y-4">
         <div class="font-bold text-2xl">{{movie_renew.title}}</div>
