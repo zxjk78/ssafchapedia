@@ -8,7 +8,7 @@
       <!-- <div class="text-gray-500 text-xl font-bold">⭐장르: {{movie['genre_ids']}}</div> -->
       <div class="text-gray-500 text-xl font-bold">⭐영화 개봉일: {{movie['release_date']}}</div>
       <div class="flex flex-wrap">
-        <div class="text-gray-500 text-xl flex-grow" v-for="actor in actors" :key="actor.pk">
+        <div class="text-gray-500 text-xl flex-grow" v-for="actor in actors" :key="actor.id">
           <router-link :to="{name:'actor_detail', params:{actorId:key}}">
             <img :src="`https://image.tmdb.org/t/p/w500/${actor.profile_path}`" class="w-32" alt="">
           </router-link>
@@ -77,6 +77,7 @@ export default {
   },
   async created() {
     // const movie_act = this.movie['actors']
+    // movie_act.pk
     // console.log(movie_act.length)
   },
 }
