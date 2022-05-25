@@ -4,10 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.permissions import IsAuthenticated
-<<<<<<< HEAD
-=======
 
->>>>>>> a1f66aa4e08ea43562b82fdc65c36bf38d166c2f
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from .models import Movie, Genre
@@ -19,10 +16,8 @@ from drf_yasg.utils import swagger_auto_schema
 class ListMovieView(ListAPIView):
     queryset = Movie.objects.all().order_by('-popularity')
     serializer_class = MovieListSerializer
-<<<<<<< HEAD
 
-=======
->>>>>>> a1f66aa4e08ea43562b82fdc65c36bf38d166c2f
+
 # Create your views here.
 # @api_view(['GET'])
 # def movie_list(request):

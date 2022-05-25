@@ -8,7 +8,13 @@ from people.models import  Cast, Actor
 #         model = Cast
 #         fields=('id','actor','movie',)
 class MovieListSerializer(serializers.ModelSerializer):
-
+    class ActorSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Actor
+            fields=(
+                '__all__'
+            )
+    actors = ActorSerializer(many=True, read_only=True)
     class Meta:
         model = Movie
         fields = (
