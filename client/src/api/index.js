@@ -96,6 +96,11 @@ const fetchMovieList = async () => {
   const res = await axiosInstance.get(movieURL)
   return res
 }
+const fetchMovieQuizInfo = async()=> {
+  const movieURL =  'movies/quiz/'
+  const res = await axiosInstance.get(movieURL)
+  return res
+}
 
 const fetchMovieRandom = async () => {
   const movieURL = MOVIE_RANDOM + '/'
@@ -107,6 +112,9 @@ const fetchMovieRecommend = async()=> {
   const res = await axiosInstance.get(movieURL)
   return res
 }
+
+
+
 //people
 
 const fetchActorSearchList = async (keyword) => {
@@ -151,6 +159,8 @@ const updateReview = async (movieId, body) => {
 
 
 
+
+
 export {
   //auth
   login,
@@ -164,6 +174,7 @@ export {
   fetchMovieList,
   fetchMovieRandom,
   fetchMovieRecommend,
+  fetchMovieQuizInfo,
   //people
   fetchActorSearchList,
   fetchActorDetail,

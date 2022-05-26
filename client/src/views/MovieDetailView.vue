@@ -33,8 +33,8 @@
     
     <h2 class="text-2xl font-bold">
       <MovieDetail
-      v-if="movieInfo"
-      :movie="movieInfo"
+      v-if="MovieInfo"
+      :movie="MovieInfo"
       :arrType="1"
       />
 
@@ -68,8 +68,11 @@ export default {
     // ScoreChart2,
   },
   async created(){
+    console.log(this.MovieId)
     const movie = await fetchMovie(this.MovieId)
-    this.movieInfo = movie.data
+    console.log(movie)
+    console.log('영화상세페이지뷰')
+    this.MovieInfo = movie.data
     this.movieCnt= movie.data.title.length
 
     const DateYear = this.MovieInfo.release_date.split('-')

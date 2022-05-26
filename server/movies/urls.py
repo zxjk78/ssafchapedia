@@ -10,4 +10,5 @@ urlpatterns = [
     path('random/',views.movie_random),
     path('search/',views.movie_search),
     path('recommend/',views.movie_recommend),
+    path('quiz/',views.movie_quiz),
 ]

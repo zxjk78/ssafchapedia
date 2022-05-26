@@ -11,6 +11,7 @@ import ReviewDetailView from '@/views/ReviewDetailView'
 import ActorDetailView from '@/views/ActorDetailView'
 import MovieDetailView from '@/views/MovieDetailView'
 import NotFoundView from '@/views/NotFoundView'
+import MovieQuizView from '@/views/MovieQuizView'
 // import NaverLoginAccessView from '@/views/NaverLoginAccessView'
 // import GoogleLoginAccessView from '@/views/GoogleLoginAccessView'
 
@@ -73,6 +74,14 @@ const routes = [
     component: MovieDetailView,
 
   },
+//Quiz
+  {
+    path: '/movies/quiz', //=> http://localhost:8080/movies/quiz
+    name: 'movie_quiz',
+    component: MovieQuizView,
+
+  },
+
 
 // 404 not found
 {

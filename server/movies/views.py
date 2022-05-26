@@ -1,4 +1,5 @@
 from collections import Counter
+import random
 from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework import status
@@ -80,3 +81,29 @@ def movie_recommend(request):
     serializer = MovieRecommendSerializer(movie_recommend, many=True)
     return Response({'genre':genre_name,'data':serializer.data}, status=status.HTTP_200_OK)
 
+@swagger_auto_schema(methods=['GET'])
+@api_view(['GET'])
+def movie_quiz(request):
+    # 랜덤하게 movie 9개
+
+    rand_movies = random.sample(list(Movie.objects.all()), 9)
+    pk_to_exclude = [m.pk for m in rand_movies]
+    rand_movies2 = Movie.objects.exclude(pk__in=pk_to_exclude)
+    rand_movies2 = random.sample(list(rand_movies2), 27)
+    
+    movie_easy = rand_movies[0:3]
+    movie_mid = rand_movies[3:6]
+    movie_hard = rand_movies[6:9]
+
+    movie_dummy_easy = rand_movies2[0:9]
+    movie_dummy_mid = rand_movies2[9:18]
+    movie_dummy_hard = rand_movies2[18:27]
+
+    result = {}
+    
+    for i in range(9):
+        ans = random.randrange(0, 4)
+        key = ''
+
+       
+    return Response({'data':False})

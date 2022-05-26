@@ -25,7 +25,8 @@ export default new Vuex.Store({
     // 로그인, 회원가입폼 modal에 사용되는 변수
     loginModal: false,
     signupModal: false,
-    
+    // 퀴즈에 사용되는 객체배열를 담을 변수
+    quizInfo: '',
 
   },
   // getters에서 state에 있는 변수들을 조회하고, component들의 computed에서는 getters의 함수만을 조회해서 사용하는 방식으로
