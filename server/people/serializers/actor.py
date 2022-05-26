@@ -39,6 +39,7 @@ class ActorDetailSerializer(serializers.ModelSerializer):
             'name', 
             'korean_name',
             'profile_path',
+            'popularity',
             'movies',
             'masterpiece',
         )
@@ -54,7 +55,9 @@ class ActorDetailSerializer(serializers.ModelSerializer):
             tmp['poster_path'] = movie.poster_path
             tmp['title'] = movie.title
             tmp['release_date'] = movie.release_date
-
+            tmp['overview'] = movie.overview
+            tmp['original_title'] = movie.original_title
+            
             result.append(tmp)
         return result
 

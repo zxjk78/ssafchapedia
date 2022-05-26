@@ -1,14 +1,11 @@
 <template>
-  <div class="flex">
+  <div class="flex-col">
         <router-link :to="{name:'movie_detail', params:{movieId:movie.pk}}">
 
-    <img :src="'https://image.tmdb.org/t/p/w300/'+movie.poster_path" alt="" class="w-20">
+    <img :src="poster_path" alt="" class="w-40">
         </router-link>
 
-    <div>
-      <div class="font-bold">{{movie.title}}</div>
-      <div class="text-gray-500 font-bold">{{release_year}}</div>
-    </div>
+
   </div>
 </template>
 
@@ -27,6 +24,10 @@ export default {
 computed: {
   release_year(){
     const tmp = this.movie.release_date.slice(0,4)
+    return tmp
+  },
+  poster_path(){
+    const tmp = this.$store.state.tmdbImgUrl + this.movie.poster_path
     return tmp
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="arrType==1">
-    <div class="grid grid-cols-3">
+    <div class="w-5/6 ml-10 grid grid-cols-3">
 
     <ActMovMaster
     v-for="movie in movies"
@@ -13,7 +13,7 @@
     </template>
     
     <template v-if="arrType==2">
-      <div class="grid grid-cols-3">
+      <div class="flex-col">
         <ActMovNormal
         v-for="movie in movies"
         :key="movie.id"
