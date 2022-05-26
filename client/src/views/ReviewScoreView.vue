@@ -243,6 +243,7 @@ data(){
     poster_path: '',
   }
 },
+
 components: {
 },
 
