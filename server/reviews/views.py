@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import get_user_model
 from .serializers.review import ReviewListSerializer, ReviewSerializer, ReviewDetailSerializer
@@ -39,6 +40,20 @@ def review_movie_list(request, movie_pk):
     reviews = Review.objects.filter(movie=movie)
     serializer = ReviewListSerializer(reviews, many=True)
     return Response(serializer.data)
+
+@authentication_classes([IsAuthenticated])
+@swagger_auto_schema(methods=['GET',], )
+@api_view(['GET'])
+def review_exist(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    isExist = Review.objects.filter(user=user, movie=movie).exists()
+    data = {
+        'result': False
+    }
+    if isExist:
+        data['result'] = True
+    return JsonResponse(data)
 
 @authentication_classes([IsAuthenticated])
 @swagger_auto_schema(methods=['POST','PUT'], request_body=ReviewSerializer)
