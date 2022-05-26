@@ -1,4 +1,6 @@
 <template>
+<form v-on:submit.prevent="onSubmit">
+
   <div class="max-w-sm bg-white w-52 rounded-lg dark:bg-gray-800 dark:border-gray-700 scale-75">
     <div class="flex flex-wrap">
         <router-link :to="{name:'actor_detail', params:{actorId:actor.pk}}">
@@ -9,9 +11,11 @@
         <!-- <div> -->
           <div class="text-2xl font-bold">⭐{{actor.korean_name}}</div>
           <div>
-            <router-link :to="{name:'profile', params:{actorId:actor.pk}}">
+            <router-link :to="{name:'profile', params:{username:username}}">
               <!-- '/:username/profile' 클릭 시 마이페이지에 저장-->
-              <button class="favor">찜</button>
+              
+              <!-- doThis:이벤트를 한번만 실행 -->
+              <button class="favor text-xl font-bold" @click="favor(), doThis()">⭐선택</button>
             </router-link>
           </div>
           <!-- <div class="text-gray-500 text-xl font-bold">⭐{{actor.vote_average}}</div> -->
@@ -20,6 +24,7 @@
     
 
   </div>
+</form>
 </template>
 
 <script>
@@ -29,6 +34,7 @@ export default {
   name: 'MovieSelect',
   data(){
     return {
+        username: this.$route.params.username,
 
     }
   },
@@ -39,13 +45,17 @@ export default {
     actor: {
       type:Object,
       required: true,
-    }
-  },
-  methods:{
+    },
     
   },
+  methods:{
+    favor:function(){
+      <UserFavoriteActor/>
+    }
+  },
   async created(){
-
+    console.log(this.username)
+    // console.log(this.userid)
     // const movie_act = this.movie['actors']
     // console.log(this.movie)
     // console.log(movie_act)
