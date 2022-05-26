@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
+import mimetypes
 #swagger
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -34,6 +35,7 @@ schema_view = get_schema_view(
    permission_classes=[permissions.AllowAny],
 )
 
+mimetypes.add_type("application/javascript", ".js", True)
 urlpatterns = [
     path('admin/', admin.site.urls),
     

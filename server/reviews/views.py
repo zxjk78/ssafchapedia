@@ -33,7 +33,7 @@ class UserReviewDetailView(ListAPIView):
         return reviews
 
 
-@swagger_auto_schema(methods=['GET'])
+@swagger_auto_schema(methods=['GET'], operation_summary='리뷰, 영화 리스트')
 @api_view(['GET'])
 def review_movie_list(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
@@ -42,7 +42,7 @@ def review_movie_list(request, movie_pk):
     return Response(serializer.data)
 
 @authentication_classes([IsAuthenticated])
-@swagger_auto_schema(methods=['GET',], )
+@swagger_auto_schema(methods=['GET',], operation_summary='해당 영화에 대한 리뷰 작성 T/F 반환')
 @api_view(['GET'])
 def review_exist(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
@@ -56,7 +56,7 @@ def review_exist(request, movie_pk):
     return JsonResponse(data)
 
 @authentication_classes([IsAuthenticated])
-@swagger_auto_schema(methods=['POST','PUT'], request_body=ReviewSerializer)
+@swagger_auto_schema(methods=['POST','PUT'], request_body=ReviewSerializer,  operation_summary='리뷰 작성')
 @api_view(['POST','PUT'])
 def review_create(request, movie_pk):
     user = request.user
@@ -76,7 +76,7 @@ def review_create(request, movie_pk):
             serializer.save()    
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(methods=['GET'])
+@swagger_auto_schema(methods=['GET'], )
 @api_view(['GET'])
 def review_user_list(request, username):
     user = get_user_model().objects.get(username=username)

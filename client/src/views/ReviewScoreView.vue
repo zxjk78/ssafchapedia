@@ -230,6 +230,7 @@
 </template>
 
 <script>
+import {reviewExist} from '@/api/index.js'
 import {createReview} from '@/api/index.js'
 import {fetchMovie} from '@/api/index.js'
 export default {
@@ -317,10 +318,35 @@ methods: {
 },
 // route를 타고 View가 렌더링 될 때 API와 통신해서 영화 정보를 가지고 옴
 async created(){
-  const movie = await fetchMovie(this.movieId)
-    this.MovieInfo = movie.data
-    this.movieTitleLength= movie.data.title.length
-    this.poster_path = this.$store.state.tmdbImgUrl + this.MovieInfo.poster_path
+
+  try {
+
+      // 1. 회원이 사전에 영화에 대한 리뷰를 작성하였으면, 리뷰 페이지로 그냥 redirect 시킨다.
+
+      const isReviewExist = await reviewExist(this.movieId)
+      console.log(isReviewExist)
+      if (isReviewExist.data.result){
+        alert('이미 리뷰를 작성하셨습니다.')
+        return this.$router.push({name: 'profile', params:{username:localStorage.getItem('username')}})
+      }
+      // 2. 없으면 리뷰를 작성하도록 화면을 보여준다.
+      const movie = await fetchMovie(this.movieId)
+      this.MovieInfo = movie.data
+      this.movieTitleLength= movie.data.title.length
+      this.poster_path = this.$store.state.tmdbImgUrl + this.MovieInfo.poster_path
+      
+    } catch (error) {
+      // console.error(error.response.data)
+
+      if (error.response.status == 404){
+        this.$router.push({name: 'not_found', params:{errorMsg: '찾으시는 영화는 존재하지 않습니다.'}})
+      }
+    }
+
+
+  
+
+
 },
 
 

@@ -18,7 +18,6 @@ class ListMovieView(ListAPIView):
     queryset = Movie.objects.all().order_by('-popularity')
     serializer_class = MovieListSerializer
 
-
 # Create your views here.
 # @api_view(['GET'])
 # def movie_list(request):
@@ -29,10 +28,12 @@ class ListMovieView(ListAPIView):
 #         # print(movies)
 #         return Response(serializer.data,status=status.HTTP_200_OK)
 
+@swagger_auto_schema(methods=['GET'], operation_summary='단일 영화 상세')
 @api_view(['GET'])
 def movie_detail(request,movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieListSerializer(movie)
+
     return Response(serializer.data)
 
 
@@ -42,6 +43,7 @@ def movie_random(request):
     serializer = ActorDetailSerializer(movies,many=True)
     return Response(serializer.data,status=status.HTTP_200_OK)
 
+@swagger_auto_schema(methods=['GET'], operation_summary='영화 검색')
 @api_view(['GET'])
 def movie_search(request):
     keyword = request.GET.get('keyword')
@@ -58,17 +60,17 @@ def movie_search(request):
 def movie_recommend(request):
     user = request.user    
     print(user)
-    user_reviewed_movies = list(user.review_set.all().values_list('movie', flat=True)) 
+    user_reviewed_movies = list(user.review_set.all().values_list('movie', flat=True)) # 1
 
     genre_cnt_list = []
     for movie_no in user_reviewed_movies:
-        movie = Movie.objects.get(pk=movie_no)
+        movie = Movie.objects.get(pk=movie_no) # 
         genres = movie.genre_ids.all()
         for genre in genres:
             genre_cnt_list.append(genre.pk)
         
-    action_code = Counter(genre_cnt_list).most_common(1)[0][0]
-    movie_recommend = Movie.objects.filter(genre_ids = action_code).exclude(id__in=user_reviewed_movies).order_by('-vote_average')[:10]
+    genre_code = Counter(genre_cnt_list).most_common(1)[0][0]
+    movie_recommend = Movie.objects.filter(genre_ids = genre_code).exclude(id__in=user_reviewed_movies).order_by('-vote_average')[:10]
 
 
     serializer = MovieRecommendSerializer(movie_recommend, many=True)

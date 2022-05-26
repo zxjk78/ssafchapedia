@@ -9,7 +9,7 @@
       <div class="text-gray-500 text-xl font-bold">⭐영화 개봉일: {{movie['release_date']}}</div>
       <div class="flex flex-wrap">
         <div class="text-gray-500 text-xl flex-grow" v-for="actor in actors" :key="actor.id">
-          <router-link :to="{name:'actor_detail', params:{actorId:key}}">
+          <router-link :to="{name:'actor_detail', params:{actorId:actor.id}}">
             <img :src="`https://image.tmdb.org/t/p/w500/${actor.profile_path}`" class="w-32" alt="">
           </router-link>
         {{actor.korean_name}}

@@ -126,6 +126,10 @@ const fetchUserReviewList = async (username, page) => {
   return res
 }
 
+const reviewExist = async (movieId) => {
+  const res = await axiosInstance.get(REVIEW_URL + movieId + `/exist/`)
+  return res
+}
 const createReview = async (movieId, body) => {
   const res = await axiosInstance.post(REVIEW_URL + movieId + `/new/`, body)
   return res
@@ -159,4 +163,5 @@ export {
   fetchUserReviewList,
   createReview,
   updateReview,
+  reviewExist,
 }

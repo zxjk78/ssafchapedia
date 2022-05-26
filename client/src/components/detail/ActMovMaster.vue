@@ -8,6 +8,7 @@
     <img :src="poster_path" alt="" class="mx-auto">
 
     </div>
+    
     <div class="bottom">
       <div :id="'movie-title'+movie.pk" class="font-bold">{{movie.title}}</div>
       <div class="text-yellow-400 font-bold mb-3">⭐{{movie.vote_average}}</div>
@@ -33,15 +34,7 @@ export default {
     }
   },
   methods:{
-
-  },
-  computed:{
-  poster_path(){
-    const tmp = this.$store.state.tmdbImgUrl + this.movie.poster_path
-    return tmp
-  },
-  },
-  mounted(){
+    setMovieTitleFontSize(){
       const movieTitle = this.$el.querySelector('#movie-title'+this.movie.pk)
       // console.log(movieTitle)
       const movieTitleLength = this.movie.title.length
@@ -57,6 +50,21 @@ export default {
       } else{
         movieTitle.classList.add('text-6xl')
       }
+    },
+
+
+  },
+  computed:{
+  poster_path(){
+    const tmp = this.$store.state.tmdbImgUrl + this.movie.poster_path
+    return tmp
+  },
+  },
+  mounted(){
+
+
+      this.setMovieTitleFontSize()
+  
   },
 }
 </script>

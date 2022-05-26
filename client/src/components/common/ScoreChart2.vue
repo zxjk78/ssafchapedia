@@ -49,18 +49,6 @@ export default {
     },
 
                     scales: {
-                          xAxes: [{
-                              gridLines: {
-                                  display:false
-                              }
-                          }],
-                          yAxes: [{
-                              gridLines: {
-                                  display:false
-                              },
-                            
-                          }],
-
 
                           r: {
                               angleLines: {

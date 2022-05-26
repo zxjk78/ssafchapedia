@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 # swagger
 from drf_yasg.utils import swagger_auto_schema
 
-@swagger_auto_schema(methods=['GET',])
+@swagger_auto_schema(methods=['GET'], operation_summary='유저 프로필')
 @api_view(['GET'])
 def profile(request, username):
     user = get_user_model().objects.get(username=username)    
@@ -35,7 +35,7 @@ def user_watch(request, username):
     serializer = UserWatchListSerializer(user)
     return Response(serializer.data)
 
-@swagger_auto_schema(methods=['GET',])
+@swagger_auto_schema(methods=['GET'], operation_summary='유저 리뷰')
 @api_view(['GET'])
 def user_review(request, username):
     user = get_user_model().objects.get(username=username)    
