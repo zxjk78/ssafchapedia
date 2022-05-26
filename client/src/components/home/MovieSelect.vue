@@ -9,7 +9,9 @@
         <!-- <div> -->
           <div class="text-2xl font-bold">⭐{{actor.korean_name}}</div>
           <div>
-            <button class="favor">찜</button>
+            <router-link :to="{name:'actor_detail', params:{actorId:actor.pk}}">
+              <button class="favor">찜</button>
+            </router-link>
           </div>
           <!-- <div class="text-gray-500 text-xl font-bold">⭐{{actor.vote_average}}</div> -->
         <!-- </div> -->
@@ -26,7 +28,7 @@ export default {
   name: 'MovieSelect',
   data(){
     return {
-      
+
     }
   },
   computed:{
