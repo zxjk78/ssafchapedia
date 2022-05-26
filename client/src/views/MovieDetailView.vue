@@ -21,7 +21,6 @@
           </div>
           
         </div>
->>>>>>> kang
         <!-- <div>작품 개수: {{movieCnt}}개</div> -->
       </div>
     </div>
