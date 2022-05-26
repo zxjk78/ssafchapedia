@@ -2,12 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import HomeView from '@/views/HomeView'
-import SignupView from '@/views/SignupView'
-import LoginView from '@/views/LoginView'
+
 import ProfileView from '@/views/ProfileView'
 import SearchView from '@/views/SearchView'
 import ReviewScoreView from '@/views/ReviewScoreView'
-import ReviewDetailView from '@/views/ReviewDetailView'
 import ActorDetailView from '@/views/ActorDetailView'
 import MovieDetailView from '@/views/MovieDetailView'
 import NotFoundView from '@/views/NotFoundView'
@@ -23,16 +21,7 @@ const routes = [
     component: HomeView,
 
   },
-  {
-    path: '/signup', //=> http://localhost:8080/signup
-    name: 'signup',
-    component: SignupView,
-  },
-  {
-    path: '/login', //=> http://localhost:8080/login
-    name: 'login',
-    component: LoginView,
-  },
+
   {
     path: '/:username/profile', //=> http://localhost:8080/:username/profile
     name: 'profile',
@@ -51,12 +40,7 @@ const routes = [
     component: ReviewScoreView,
 
   },
-  {
-    path: '/:movieId/review/new/detail', //=> http://localhost:8080/:movieId/review/new/detail
-    name: 'review_new_detail',
-    component: ReviewDetailView,
 
-  },
 
 
   //actor
