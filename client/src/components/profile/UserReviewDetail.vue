@@ -35,9 +35,9 @@
         </div>
       </div>
       <div class="review-box relative flex justify-center items-center">
-        <div v-if="review.content">
-          <div>{{review.title}}</div>
-          <div>{{review.content}}</div>
+        <div v-if="review.content" class="w-96">
+          <div class="bg-green-400 text-xl p-2 rounded-t-xl font-bold">{{review.title}}</div>
+          <div class="h-48 text-lg bg-yellow-200 p-2 rounded-b-xl text-gray-500">{{review.content}}</div>
         </div>
         <div v-else class="">
           작성한 상세 리뷰가 없습니다.

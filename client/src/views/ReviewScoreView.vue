@@ -324,6 +324,7 @@ async created(){
 
       // 1. 회원이 사전에 영화에 대한 리뷰를 작성하였으면, 리뷰 페이지로 그냥 redirect 시킨다.
 
+      console.log('영화아이디', this.movieId)
       const isReviewExist = await reviewExist(this.movieId)
       console.log(isReviewExist)
       if (isReviewExist.data.result){
@@ -333,6 +334,7 @@ async created(){
       // 2. 없으면 리뷰를 작성하도록 화면을 보여준다.
       const movie = await fetchMovie(this.movieId)
       this.MovieInfo = movie.data
+      console.log(movie)
       this.movieTitleLength= movie.data.title.length
       this.poster_path = this.$store.state.tmdbImgUrl + this.MovieInfo.poster_path
       
