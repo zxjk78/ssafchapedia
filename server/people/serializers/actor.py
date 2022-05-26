@@ -75,6 +75,9 @@ class ActorDetailSerializer(serializers.ModelSerializer):
             tmp['title'] = movie.title
             tmp['vote_average'] = movie.vote_average
             tmp['release_date'] = movie.release_date
+            tmp['overview'] = movie.overview
+            tmp['original_title'] = movie.original_title
+
 
 
             result.append(tmp)
