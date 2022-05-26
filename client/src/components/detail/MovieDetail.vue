@@ -3,10 +3,18 @@
   <!-- <template v-if="arrType==1"> -->
 
       <div class="popular-list row row-cols-1 row-cols-md-5 gy-3">
-      <div class="text-2xl font-bold">{{movie['title']}}</div>
-      <div class="text-gray-500 text-xl font-bold">⭐평점: {{movie['vote_average']}}</div>
+      <!-- <div class="text-2xl font-bold">{{movie['title']}}</div> -->
+      <!-- <div class="text-gray-500 text-xl font-bold">⭐평점: {{movie['vote_average']}}</div> -->
       <!-- <div class="text-gray-500 text-xl font-bold">⭐장르: {{movie['genre_ids']}}</div> -->
-      <div class="text-gray-500 text-xl font-bold">⭐영화 개봉일: {{movie['release_date']}}</div>
+      <div class="text-2xl font-bold">
+         <router-link :to="{name:'review_new_detail', params:{movieId:movie.pk}}">
+           <button class="bg-yellow-200">리뷰 쓰기</button> 
+          </router-link>
+      </div>
+
+      <div class="text-2xl font-bold">출연 배우진</div>
+      <!-- <div class="text-gray-500 text-xl font-bold">⭐{{movie['overview']}}</div> -->
+      <!-- <div class="text-gray-500 text-xl font-bold">⭐영화 개봉일: {{movie['release_date']}}</div> -->
       <div class="flex flex-wrap">
         <div class="text-gray-500 text-xl flex-grow" v-for="actor in actors" :key="actor.id">
           <router-link :to="{name:'actor_detail', params:{actorId:actor.id}}">
