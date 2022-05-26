@@ -3,13 +3,7 @@
 
     <div class="w-3/4 mx-auto">
 
-    <div class="flex justify-between mx-auto mb-10 border-b-2	">
-      <div v-if="username">
-        <MovieSelect 
-        :username="username"/>
-      </div>
-      <div class="text-3xl font-bold">{{username}} 님이 좋아하는 영화배우🎬</div>
-    </div>
+
 
     <!-- <UserFovoriteActor
     :user="username"
@@ -39,7 +33,6 @@
 <script>
 import UserReviewDetail from '@/components/profile/UserReviewDetail.vue'
 
-import MovieSelect from '@/components/home/MovieSelect'
 // import UserFavoriteActor from '@/components/profile/UserFavoriteActor'
 import {fetchUserReviewList} from '@/api/index.js'
 
@@ -54,7 +47,6 @@ export default {
   components:{
     UserReviewDetail,
 
-    MovieSelect,
     // UserFavoriteActor,
   },
   computed:{
@@ -63,7 +55,7 @@ export default {
   methods:{
     async onScroll(){
       // scrollTop: 스크롤바의 위에서부터의 수직 위치, clientHeight: 화면에 표시되는 해당 요소의 높이, scrollHeight 요소의 전체 높이
-     const {scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      const {scrollTop, clientHeight, scrollHeight } = document.documentElement;
       // console.log(scrollTop)
       if (scrollTop + clientHeight >= scrollHeight - 10) {
         if (this.page > this.maxPage) {
