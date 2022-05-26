@@ -6,9 +6,9 @@
       <!-- <div class="text-2xl font-bold">{{movie['title']}}</div> -->
       <!-- <div class="text-gray-500 text-xl font-bold">⭐평점: {{movie['vote_average']}}</div> -->
       <!-- <div class="text-gray-500 text-xl font-bold">⭐장르: {{movie['genre_ids']}}</div> -->
-      <div class="text-2xl font-bold">
+      <div class="text-2xl font-bold bg-yellow-200">
          <router-link :to="{name:'review_new', params:{movieId:movie.pk}}">
-           <button class="bg-yellow-200">리뷰 쓰기</button> 
+           리뷰쓰기
           </router-link>
       </div>
 
@@ -24,23 +24,7 @@
       </div>
       </div>
       
-      <!-- <div class="bg-red-100">
-        <router-link :to="{name: 'actor_detail', params:{actorId:actor.pk}}"><img :src="movie_actor.profile_path" class="w-32" alt=""></router-link>
-      </div> -->
-      <!-- <div class="w-1/3 flex flex-row justify-start gap-y-4">
-          <img :src="`https://image.tmdb.org/t/p/w500/${movie_actor[1].profile_path}`" class="w-32" alt="">
-          {{movie['actors'][1].korean_name}}
-          <img :src="`https://image.tmdb.org/t/p/w500/${movie['actors'][2].profile_path}`" class="w-32" alt="">
-          {{movie['actors'][2].korean_name}}
-            
-            
-          <img :src="`https://image.tmdb.org/t/p/w500/${movie['actors'][3].profile_path}`" class="w-32" alt="">
-          {{movie['actors'][3].korean_name}}
-      </div>
-      <div :v-for="item in 5">
-        <img :src="`https://image.tmdb.org/t/p/w500/${movie['actors'][item].profile_path}`" class="w-32" alt="">
-          {{movie['actors'][item].korean_name}}
-      </div> -->
+      
       </div>
     </div>   
 
@@ -81,14 +65,15 @@ export default {
     actor.profile_path = `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
 
     return actor
-  }
+  },
+  
   },
   async created() {
     // const movie_act = this.movie['actors']
     // movie_act.pk
     // console.log(movie_act.length)
-    const tmp = this.movie.actors
-      console.log(tmp)
+    // const tmp = this.movie.actors
+      // console.log(tmp)
   },
 }
 </script>
