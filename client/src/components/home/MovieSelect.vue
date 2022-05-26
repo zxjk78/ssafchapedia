@@ -9,7 +9,8 @@
         <!-- <div> -->
           <div class="text-2xl font-bold">⭐{{actor.korean_name}}</div>
           <div>
-            <router-link :to="{name:'actor_detail', params:{actorId:actor.pk}}">
+            <router-link :to="{name:'profile', params:{actorId:actor.pk}}">
+              <!-- '/:username/profile' 클릭 시 마이페이지에 저장-->
               <button class="favor">찜</button>
             </router-link>
           </div>
