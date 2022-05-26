@@ -32,7 +32,6 @@
 <script>
 import UserReviewDetail from '@/components/profile/UserReviewDetail.vue'
 
-import MovieSelect from '@/components/home/MovieSelect'
 // import UserFavoriteActor from '@/components/profile/UserFavoriteActor'
 import {fetchUserReviewList} from '@/api/index.js'
 
@@ -47,7 +46,6 @@ export default {
   components:{
     UserReviewDetail,
 
-    MovieSelect,
     // UserFavoriteActor,
   },
   computed:{
