@@ -142,11 +142,19 @@ const createReview = async (movieId, body) => {
   const res = await axiosInstance.post(REVIEW_URL + movieId + `/new/`, body)
   return res
 }
-const updateReview = async (movieId, body) => {
-  const res = await axiosInstance.put(REVIEW_URL + movieId + `/new/`, body)
+const fetchReview = async(reviewId) => {
+  const res = await axiosInstance.get(REVIEW_URL + reviewId + `/get/`)
+  return res
+}
+const updateReview = async (reviewId, body) => {
+  const res = await axiosInstance.put(REVIEW_URL + reviewId + `/update/`, body)
   return res
 }
 
+const deleteReview = async(reviewId) => {
+  const res = await axiosInstance.delete('/reviews/' + reviewId + `/delete/`)
+  return res
+}
 
 
 
@@ -168,10 +176,12 @@ export {
   fetchActorSearchList,
   fetchActorDetail,
   //review
+  fetchReview,
   fetchReviewList,
   fetchReviewGet,
   fetchUserReviewList,
   createReview,
   updateReview,
   reviewExist,
+  deleteReview,
 }

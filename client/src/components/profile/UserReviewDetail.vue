@@ -19,12 +19,7 @@
         </div>
       </div>
       <div class="score-box flex flex-col justify-center items-center">
-        <!-- <ScoreChart
-        v-if="movieInfo.scores"
-        :sscores="movieInfo.scores"
-        :chartId="idx"
-        class="w-96"
-        /> -->
+        
         <ScoreChart2
         v-if="movieInfo.scores"
         :sscores="movieInfo.scores"
@@ -33,13 +28,13 @@
         />
 
         <div class="mt-5 text-bold text-xl">
-        {{username}}님의 다각도 평가점수
+        {{profile}}님의 다각도 평가점수
         </div>
         <div class="mt-3">
           <span class="p-2">{{movieInfo.scoreEmoji}}</span>{{movieInfo.scoreSum}} / 15
         </div>
       </div>
-      <div class="review-box flex justify-center items-center">
+      <div class="review-box relative flex justify-center items-center">
         <div v-if="review.content">
           <div>{{review.title}}</div>
           <div>{{review.content}}</div>
@@ -47,22 +42,55 @@
         <div v-else class="">
           작성한 상세 리뷰가 없습니다.
         </div>
+        
+        <div v-if="profile==username">
+          <div class="absolute right-0 top-20">
+            <button :id="'d'+ review.pk" class="p-2 rounded bg-red-300" @click="deleteReview">삭제</button>
+            <button :id="'u'+review.pk" class="p-2 rounded bg-blue-300" @click="updateReview">수정</button>
+          </div>
+        </div>
+        </div>
       </div>
 
     </div>
-  </div>
 </template>
 
 <script>
 // import ScoreChart from '@/components/common/ScoreChart.vue'
 import ScoreChart2 from '@/components/common/ScoreChart2.vue'
+import {deleteReview} from '@/api/index.js'
+
 export default {
 name: 'UserReviewDetail',
 data(){
   return {
-    username: this.$route.params.username,
-
+    profile: this.$route.params.username,
+    username: localStorage.getItem('username')
   }
+},
+methods:{
+  async deleteReview(e){    
+    let id = e.target.id
+    id = id.slice(1, )
+
+    try {
+      await deleteReview(id)
+      this.$router.go();
+    } catch (error) {
+      console.error(error)
+    }
+
+  },
+  updateReview(e){    
+    let id = e.target.id
+    id = id.slice(1, )
+    
+    console.log(id)
+    this.$router.push({name:'review_update', params:{reviewId:id}})
+
+  },
+
+
 },
 props:{
   review:{
@@ -109,7 +137,10 @@ computed: {
 
 },
 
-
+mounted(){
+  console.log(this.username)
+  console.log(this.profile)
+}
 }
 </script>
 

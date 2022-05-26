@@ -84,20 +84,30 @@ def review_user_list(request, username):
     serializer = ReviewDetailSerializer(review)
     return Response(serializer.data)
 
-# class UserReviewDetailView(ListAPIView):
-#     serializer_class = ReviewDetailSerializer
-#     lookup_url_kwarg = 'username'
-#     def get_queryset(self):
-#         username = self.kwargs.get(self.lookup_url_kwarg)
-#         user = get_user_model().objects.get(username=username)
-#         reviews = Review.objects.filter(user=user).order_by('-pk')
-#         return reviews
+@authentication_classes([IsAuthenticated])
+@api_view(['DELETE'])
+def review_delete(request, review_pk):
+    print(review_pk)
+    review = get_object_or_404(Review, pk=review_pk)
+    review.delete()    
+    return Response({'msg': f'{review_pk}가 성공적으로 삭제'})
 
-# @swagger_auto_schema(methods=['GET'])
-# @api_view(['GET'])
-# def review_user_list(request, username):
-#     user = get_user_model().objects.get(username=username)
-#     review = Review.objects.filter(user=user).order_by('-pk')[0:]
-#     serializer = ReviewDetailSerializer(review)
-#     return Response(serializer.data)
+@authentication_classes([IsAuthenticated])
+@api_view(['GET'])
+def review_get(request, review_pk):
+    
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = ReviewSerializer(review)
+    return Response(serializer.data)
+
+@authentication_classes([IsAuthenticated])
+@api_view(['PUT'])
+def review_update(request, review_pk):
+    
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = ReviewSerializer(review, data=request.data, partial=True)
+    if serializer.is_valid(raise_exception=True):
+            serializer.save()    
+    return Response(serializer.data, status=status.HTTP_200_OK)
+    
 

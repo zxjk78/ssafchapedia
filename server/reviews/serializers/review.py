@@ -8,6 +8,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = (
+            'pk',
             'user', 
             'movie', 
             'title', 
@@ -26,6 +27,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = (
+            'pk',
             'user', 
             'movie', 
             'title', 
@@ -51,6 +53,7 @@ class ReviewDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = (
+            'pk',
             'user', 
             'movie', 
             'title', 

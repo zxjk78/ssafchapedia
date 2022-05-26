@@ -6,6 +6,7 @@ import HomeView from '@/views/HomeView'
 import ProfileView from '@/views/ProfileView'
 import SearchView from '@/views/SearchView'
 import ReviewScoreView from '@/views/ReviewScoreView'
+import ReviewUpdate from '@/views/ReviewUpdate'
 import ActorDetailView from '@/views/ActorDetailView'
 import MovieDetailView from '@/views/MovieDetailView'
 import NotFoundView from '@/views/NotFoundView'
@@ -38,6 +39,12 @@ const routes = [
     path: '/:movieId/review/new', //=> http://localhost:8080/:movieId/review/new
     name: 'review_new',
     component: ReviewScoreView,
+
+  },
+  {
+    path: '/review/:reviewId/update', //=> http://localhost:8080/review/:reviewId/update
+    name: 'review_update',
+    component: ReviewUpdate,
 
   },
 

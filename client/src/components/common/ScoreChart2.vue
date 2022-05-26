@@ -99,7 +99,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.sscores)
         this.fillData(this.sscores);
     },
     data() {
