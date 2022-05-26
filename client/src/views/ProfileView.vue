@@ -4,7 +4,6 @@
     <div class="w-3/4 mx-auto">
 
 
-
     <!-- <UserFovoriteActor
     :user="username"
     />  -->
@@ -33,6 +32,7 @@
 <script>
 import UserReviewDetail from '@/components/profile/UserReviewDetail.vue'
 
+import MovieSelect from '@/components/home/MovieSelect'
 // import UserFavoriteActor from '@/components/profile/UserFavoriteActor'
 import {fetchUserReviewList} from '@/api/index.js'
 
@@ -47,6 +47,7 @@ export default {
   components:{
     UserReviewDetail,
 
+    MovieSelect,
     // UserFavoriteActor,
   },
   computed:{

@@ -23,6 +23,7 @@
           </div>
           
         </div>
+
         <!-- <div>작품 개수: {{movieCnt}}개</div> -->
       </div>
     </div>
@@ -64,6 +65,7 @@ export default {
       story: 0,
       i:0,
       average:'',
+
     }
   },
   components: {
@@ -111,6 +113,7 @@ export default {
     return {
       
     }
+
   },
   }
 }
