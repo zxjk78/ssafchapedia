@@ -21,7 +21,7 @@
     </div>
     <div class="w-1/2 here relative inline-block">
       <div class="">
-      <ScoreChart/>
+      <!-- <ScoreChart/> -->
       </div>
       
     </div>

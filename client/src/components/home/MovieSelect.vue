@@ -25,7 +25,9 @@ import {mapState} from 'vuex'
 export default {
   name: 'MovieSelect',
   data(){
-    
+    return {
+      
+    }
   },
   computed:{
     ...mapState(['actorInfo'])
