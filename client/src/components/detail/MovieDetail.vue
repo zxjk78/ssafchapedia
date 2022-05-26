@@ -7,7 +7,7 @@
       <!-- <div class="text-gray-500 text-xl font-bold">⭐평점: {{movie['vote_average']}}</div> -->
       <!-- <div class="text-gray-500 text-xl font-bold">⭐장르: {{movie['genre_ids']}}</div> -->
       <div class="text-2xl font-bold">
-         <router-link :to="{name:'review_new_detail', params:{movieId:movie.pk}}">
+         <router-link :to="{name:'review_new', params:{movieId:movie.pk}}">
            <button class="bg-yellow-200">리뷰 쓰기</button> 
           </router-link>
       </div>
