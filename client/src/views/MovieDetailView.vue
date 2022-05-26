@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="flex">
-      <img :src="'https://image.tmdb.org/t/p/w200/'+ MovieInfo.poster_path" class="w-50" alt="">
+      <img :src="movieInfo.poster_path" class="w-80" alt="">
       <div>
-        <div><h1 class="text-3xl font-bold">{{MovieInfo.title}}</h1></div>
+        <div><h1 class="text-3xl font-bold">{{movieInfo.title}}</h1></div>
         <!-- <div>작품 개수: {{movieCnt}}개</div> -->
       </div>
     </div>
@@ -13,10 +13,11 @@
     </h1>
    
     <!-- <h1 class="text-2xl font-bold">전체</h1>        -->
+    
     <h2 class="text-2xl font-bold">
       <MovieDetail
-      v-if="MovieInfo"
-      :movie="MovieInfo"
+      v-if="movieInfo"
+      :movie="movieInfo"
       :arrType="1"
       />
 
@@ -34,8 +35,10 @@ export default {
   data(){
     return {
       MovieId:this.$route.params.movieId,
-      MovieInfo: '',
-      movieCnt: ''
+      movieInfo: '',
+      movieCnt: '',
+      
+
     }
   },
   components: {
@@ -44,8 +47,10 @@ export default {
   },
   async created(){
     const movie = await fetchMovie(this.MovieId)
-    this.MovieInfo = movie.data
+    this.movieInfo = movie.data
     this.movieCnt= movie.data.title.length
+    this.movieInfo.poster_path = this.$store.state.tmdbImgUrl + movie.data.poster_path
+    console.log(movie.data)
   },
   
 }
