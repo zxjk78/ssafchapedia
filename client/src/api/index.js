@@ -15,6 +15,7 @@ const PROFILE_URL = '/profile/'
 // movie
 const MOVIE_SEARCH_LIST_URL = '/movies/search'
 const MOVIE_URL = '/movies/movie'
+const MOVIE_RANDOM = '/movies/random'
 // const MOVIE_LIST_URL = '/movies/'
 // const MOVIE_DETAIL_URL = '/movies/<int:movie_pk>/detail/'
 // const MOVIE_SEARCH_LIST_URL = '/movies/search'
@@ -95,6 +96,11 @@ const fetchMovieList = async () => {
   return res
 }
 
+const fetchMovieRandom = async () => {
+  const movieURL = MOVIE_RANDOM + '/'
+  const res = await axiosInstance.get(movieURL)
+  return res
+}
 
 //people
 
@@ -144,6 +150,7 @@ export {
   fetchMovie,
   fetchMovieSearchList,
   fetchMovieList,
+  fetchMovieRandom,
   //people
   fetchActorSearchList,
   fetchActorDetail,
