@@ -58,6 +58,7 @@ const routes = [
 
   },
 
+
   //actor
   {
     path: '/actor/:actorId/detail', //=> http://localhost:8080/actor/:actorId/detail
