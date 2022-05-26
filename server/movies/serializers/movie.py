@@ -65,3 +65,9 @@ class MovieRecommendSerializer(serializers.ModelSerializer):
             'release_date',
             'poster_path',
         )
+
+class GenreSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Genre
+        fields = ('id', 'genre',)

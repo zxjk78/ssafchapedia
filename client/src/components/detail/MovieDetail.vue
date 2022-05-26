@@ -77,6 +77,7 @@ export default {
   },
   async created() {
     // const movie_act = this.movie['actors']
+    // movie_act.pk
     // console.log(movie_act.length)
     const tmp = this.movie.actors
       console.log(tmp)
