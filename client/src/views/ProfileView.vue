@@ -2,7 +2,11 @@
   <div class="">
 
     <div class="w-3/4 mx-auto">
+    <div class="flex justify-between mx-auto mb-10 border-b-2	">
+      <div class="text-3xl font-bold">{{username}} 님이 좋아하는 영화배우🎬</div>
 
+    </div>
+    
     <div class="flex justify-between mx-auto mb-10 border-b-2	">
       <div class="text-3xl font-bold">{{username}} 님이 리뷰를 남긴 작품들🎥</div>
 
