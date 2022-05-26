@@ -60,11 +60,13 @@ class MovieRecommendSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = (
+            'pk',
             'title',
             'vote_average',
             'release_date',
             'poster_path',
         )
+
 
 class GenreSerializer(serializers.ModelSerializer):
 

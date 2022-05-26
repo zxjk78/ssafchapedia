@@ -16,6 +16,7 @@ const PROFILE_URL = '/profile/'
 const MOVIE_SEARCH_LIST_URL = '/movies/search'
 const MOVIE_URL = '/movies/movie'
 const MOVIE_RANDOM = '/movies/random'
+const MOVIE_RECOMMEND = '/movies/recommend'
 // const MOVIE_LIST_URL = '/movies/'
 // const MOVIE_DETAIL_URL = '/movies/<int:movie_pk>/detail/'
 // const MOVIE_SEARCH_LIST_URL = '/movies/search'
@@ -101,7 +102,11 @@ const fetchMovieRandom = async () => {
   const res = await axiosInstance.get(movieURL)
   return res
 }
-
+const fetchMovieRecommend = async()=> {
+  const movieURL = MOVIE_RECOMMEND + '/'
+  const res = await axiosInstance.get(movieURL)
+  return res
+}
 //people
 
 const fetchActorSearchList = async (keyword) => {
@@ -158,6 +163,7 @@ export {
   fetchMovieSearchList,
   fetchMovieList,
   fetchMovieRandom,
+  fetchMovieRecommend,
   //people
   fetchActorSearchList,
   fetchActorDetail,
